@@ -10,9 +10,9 @@ const inbentarioaService = {
 
             //BORRAR EL CONST DATA Y RETURN DATA CUANDO TENGAMOS BACK
             const data = [
-                { id: 1, nombre: 'Mark', modelo: 'Otto', categoria: 'Monitoreoa', cantidad: 5 },
-                { id: 2, nombre: 'Jacob', modelo: 'Thornton', categoria: 'Ordenagailua', cantidad: 3 },
-                { id: 3, nombre: 'Larry the Bird', modelo: 'Dell', categoria: 'Pantaila', cantidad: 7 }
+                { id: 1, izena: 'Mark', modeloa: 'Otto', kategoria: 'Monitoreoa', kantitatea: 5 },
+                { id: 2, izena: 'Jacob', modeloa: 'Thornton', kategoria: 'Ordenagailua', kantitatea: 3 },
+                { id: 3, izena: 'Larry the Bird', modeloa: 'Dell', kategoria: 'Pantaila', kantitatea: 7 }
             ];
             return data;
 
