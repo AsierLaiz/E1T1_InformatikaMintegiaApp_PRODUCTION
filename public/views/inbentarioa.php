@@ -1,4 +1,5 @@
-<?php require_once "partials/header.php" ?>
+<?php require_once "partials/header.html" ?>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 <div class="contenedor my-5">
   <h1 class="mb-5">Inbentarioa</h1>
@@ -24,4 +25,4 @@
 
 </div>
 <script src="../assets/js/inbentarioa.js"></script>
-<?php require_once "partials/footer.php" ?>
+<?php require_once "partials/footer.html" ?>
