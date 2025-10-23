@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../assets/vendor/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="..." crossorigin="anonymous" />
     <link rel="stylesheet" href="../assets/css/styles.css" />
+    <link rel="stylesheet" href="../assets/css/syles2.css" />
     <title>FP Santurtzi LH</title>
 </head>
 <body>
