@@ -13,9 +13,9 @@
 <header>
     <nav class="navbar navbar-expand-lg pb-3 fixed-top">
         
-        <a class="navbar-brand ms-5" href="index.php"><img src="../assets/img/logo/FPSanturtzi_Logo.png" /></a>
+        <a class="navbar-brand ms-5" href="home.php"><img src="../assets/img/logo/FPSanturtzi_Logo.png" /></a>
         
-        <button class="navbar-toggler custom-transition collapsed" 
+        <button class="navbar-toggler custom-transition collapsed"
                 type="button" 
                 data-bs-toggle="collapse"       
                 data-bs-target="#mainMenu"       
@@ -47,8 +47,24 @@
                 </li>
             </ul>
             <ul class="navbar-nav ms-5 mb-2 mb-lg-0">
-                <li class="perfil d-none d-lg-block">
-                    <img src="../assets/img/perfil/perfil.png"/>
+                <li class="perfil d-none d-lg-block position-relative" tabindex="0">
+                    <a href="#" id="profile-toggle" class="profile-toggle d-block">
+                        <img src="../assets/img/perfil/perfil.png" alt="Foto de Perfil" />
+                    </a>
+
+                    <div id="profile-menu" class="profile-menu-box card shadow-lg p-3 bg-white border border-secondary rounded-3">
+                        
+                        <button class="close-btn position-absolute top-0 end-0 m-2 border-0 bg-transparent text-secondary" aria-label="Itxi menua">
+                            <i class="fas fa-times x-cerrar-pront"></i>
+                        </button>
+                        <div class="d-block mb-3"></div>
+                        <a href="./perfil.php" class="btn btn-primary w-100 mb-2">
+                            <i class="fas fa-user me-1"></i>Perfila
+                        </a>
+                        <a href="#" class="btn btn-danger w-100">
+                            <i class="fas fa-sign-out-alt me-1"></i> Saioa Itxi
+                        </a>
+                    </div>
                 </li>
             </ul>
         </div>
