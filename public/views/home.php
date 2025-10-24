@@ -13,7 +13,7 @@
             </h2>
 
             <a href="./perfil.php" class="btn btn-outline-light btn-lg px-5 py-3 rounded-pill shadow-lg text-decoration-none">
-                Ver Mi Perfil
+                Ikusi Perfila
             </a>
         </div>
     </div>

@@ -317,3 +317,113 @@ footer a.text-white-50:hover {
     object-fit: cover;
 }
 /* ------------- */
+
+/* EROSKETAK */
+.erosketak {
+    border-bottom: none;
+}
+
+.erosketak .active {
+    color: black !important;
+}
+
+.erosketak .active i {
+    color: black !important;
+}
+
+.erosketak .nav-link {
+    color: rgb(165, 165, 165);
+    background-color: white;
+    transition: 300ms;
+}
+
+.erosketak .nav-link i {
+    color: rgb(165, 165, 165);
+    transition: 300ms;
+}
+
+.erosketak .nav-link:hover {
+    color: black;
+}
+
+.erosketak .nav-link:hover > i {
+    color: black;
+}
+
+.radius-inferior-5 {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.card-erosketak {
+    background-color: #00000000 !important;
+}
+
+.tab-content {
+    background-color: white;
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+}
+
+.tab-list-custom.flex-column li {
+    width: 100%;
+}
+
+.tab-list-custom.flex-column .nav-link {
+    width: 100%;
+    text-align: center;
+    border-radius: 0;
+    margin-bottom: -1px;
+}
+
+.tab-list-custom.flex-column .nav-link.active {
+    border-color: #dee2e6;
+}
+
+.erosketak .btn-superior-erosketak button {
+    border-top-left-radius: 10px !important;
+    border-top-right-radius: 10px !important;
+}
+
+.erosketak .nav-link {
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+}
+
+.erosketak .nav-link {
+    padding-top: 0.8rem !important;
+    padding-bottom: 0.8rem !important;
+}
+
+@media (min-width: 768px) {
+    .erosketak .nav-link {
+        border-bottom: 1px solid rgb(165, 165, 165);
+        border-radius: 0px !important;
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+    }
+
+    .erosketak .btn-superior-erosketak button {
+        border-top-right-radius: 0px !important;
+    }
+
+    .erosketak .btn-inferior-erosketak button {
+        border-top-right-radius: 10px !important;
+    }
+
+    .tab-list-custom.flex-md-row li {
+        width: auto;
+    }
+
+    .tab-list-custom.flex-md-row .nav-link {
+        width: 100%; 
+        text-align: center;
+        /* border-radius: 0.5rem 0.5rem 0 0 !important;  */
+    }
+
+    .tab-list-custom.flex-md-row .nav-link.active {
+        border-color: #dee2e6 #dee2e6 #fff;
+    }
+}
+/* ------------- */
