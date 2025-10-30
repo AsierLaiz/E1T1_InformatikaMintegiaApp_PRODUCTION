@@ -1,3 +1,7 @@
+<?php
+require_once __DIR__ . '/../../src/require_auth.php';
+$CURRENT_USER = require_auth_view('login');
+?>
 <?php require_once "partials/header.html" ?>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
@@ -10,11 +14,13 @@
   <table class=" table  table-hover" id="tabla-ekipoak">
     <thead>
       <tr>
-        <th scope="col">Id</th>
+        <th scope="col">ID</th>
         <th scope="col">Izena</th>
+        <th scope="col">Deskribapena</th>
+        <th scope="col">Marka</th>
         <th scope="col">Modeloa</th>
-        <th scope="col">Kategoria</th>
-        <th scope="col">Kantitatea</th>
+        <th scope="col">Stock</th>
+        <th scope="col">Kategoria ID</th>
         <th scope="col"></th>
         <th scope="col"></th>
       </tr>

@@ -19,6 +19,7 @@
 
         const username = document.getElementById('username').value.trim();
         const password = document.getElementById('password').value;
+        const remember = document.getElementById('rememberMe').checked;
 
         if (!username || !password) {
             showAlert('Erabiltzailea eta pasahitza beharrezkoak dira.', 'warning');
@@ -31,7 +32,8 @@
         try {
             const body = {
                 erabiltzailea: username,
-                pasahitza: password
+                pasahitza: password,
+                remember: remember ? 1 : 0
             };
 
             const resp = await fetch(apiUrl, {
@@ -58,7 +60,7 @@
             showAlert(successMsg, 'success');
 
             setTimeout(()=> {
-                window.location.href = 'home.php';
+                window.location.href = 'home';
             }, 800);
 
         } catch (err) {

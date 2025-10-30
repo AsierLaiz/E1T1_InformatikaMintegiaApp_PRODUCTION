@@ -13,11 +13,9 @@ function renderizarTabla(produktuak) {
     produktuak.forEach(p => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td>${p.id}</td>
-            <td>${p.izena}</td>
-            <td>${p.modeloa}</td>
-            <td>${p.kategoria}</td>
-            <td>${p.kantitatea}</td>
+            <td>${p.etiketa}</td>
+            <td>${p.idEkipamendu}</td>
+            <td>${p.erosketaData}</td>
             <td>
                 <button class="btnIkusi">
                     <i class="fa-solid fa-eye"></i>
@@ -27,21 +25,18 @@ function renderizarTabla(produktuak) {
                 <button class="btnEditatu"><i class="fa-solid fa-pen-to-square"></i></button>
             </td>
     `;
-    tr.querySelector('.btnIkusi').addEventListener('click', () => ikusiProduktoa(p));
+    tr.querySelector('.btnIkusi').addEventListener('click', () => ikusi(p));
         tbody.appendChild(tr);
     });
 }
 
 
-function ikusiProduktoa(produktua) {
+function ikusi(produktua) {
   const modalBody = document.querySelector('#inbentarioaModal .modal-body');
   modalBody.innerHTML = `
-    <p><strong>ID:</strong> ${produktua.id}</p>
-    <p><strong>Izena:</strong> ${produktua.izena}</p>
-    <p><strong>Modeloa:</strong> ${produktua.modeloa}</p>
-    <p><strong>Kategoria:</strong> ${produktua.kategoria}</p>
-    <p><strong>Kantitatea:</strong> ${produktua.kantitatea}</p>
-    <p><strong>Deskribapena:</strong> ${produktua.deskribapena}</p>
+    <p><strong>Etiketa:</strong> ${produktua.etiketa}</p>
+    <p><strong>Ekipamendu ID:</strong> ${produktua.idEkipamendu}</p>
+    <p><strong>Erosketa data:</strong> ${produktua.erosketaData}</p>
   `;
   const modal = new bootstrap.Modal(document.getElementById('inbentarioaModal'));
   modal.show();

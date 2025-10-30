@@ -7,6 +7,7 @@ class Ekipo {
 
     public function __construct($db) { $this->db = $db; }
 
+    // Get arrunta, bueltatzen ditu erregistro guztiak
     public function getAll() {
         $emaitza = $this->db->getKonexioa()->query("SELECT * FROM ekipamendua");
         if(!$emaitza) die("ERROREA: Ezin izan dira ekipamenduak eskuratu.");
@@ -15,6 +16,7 @@ class Ekipo {
         return $datuak;
     }
 
+    // Get id-aren arabera
     public function get($id){
         $stmt = $this->db->getKonexioa()->prepare("SELECT * FROM ekipamendua WHERE id = ?");
         $stmt->bind_param("i",$id);
@@ -24,16 +26,18 @@ class Ekipo {
         return $emaitza->num_rows ? $emaitza->fetch_assoc() : null;
     }
 
+    // Ekipamendu berria sortzen du
     public function create($izena,$deskribapena,$marka,$modelo,$stock,$idKategoria){
         $stmt = $this->db->getKonexioa()->prepare(
             "INSERT INTO ekipamendua (izena, deskribapena, marka, modelo, stock, idKategoria) VALUES (?,?,?,?,?,?)"
         );
-        $stmt->bind_param("sssiii",$izena,$deskribapena,$marka,$modelo,$stock,$idKategoria);
+        $stmt->bind_param("ssssii",$izena,$deskribapena,$marka,$modelo,$stock,$idKategoria);
         $emaitza = $stmt->execute();
         $stmt->close();
         return $emaitza;
     }
 
+    // Ekipamendu bat ezabatzen du ID-aren arabera
     public function delete($id){
         $stmt = $this->db->getKonexioa()->prepare("DELETE FROM ekipamendua WHERE id = ?");
         $stmt->bind_param("i",$id);

@@ -1,51 +1,51 @@
-const API_URL = '../../src/controllers/EkipoController.php';
+const API_URL = '../../src/controllers/ErabiltzaileController.php';
 
-const ekipoakService = {
+const erabiltzaileakService = {
     // Erregistro guztiak lortu
     async getAll() {
         try {
             const response = await fetch(API_URL, { method: 'GET' });
-            if (!response.ok) throw new Error('Ekipamendua: Errorea datuak lortzean.');
+            if (!response.ok) throw new Error('Erabiltzaileak: Errorea datuak lortzean.');
             return await response.json();
         } catch (error) {
-            console.error('Errorea ekipoa lortzean:', error);
+            console.error('Errorea erabiltzaileak lortzean:', error);
             return [];
         }
     },
 
     // Erregistro berria sortu
-    async create(izena, deskribapena, marka, modelo, stock, idKategoria) {
+    async create(nan, izena, abizena, erabiltzailea, pasahitza, rol) {
         try {
             const response = await fetch(API_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ izena, deskribapena, marka, modelo, stock, idKategoria })
+                body: JSON.stringify({ nan, izena, abizena, erabiltzailea, pasahitza, rol })
             });
             const data = await response.json();
-            if (!response.ok) throw new Error(data.error || 'Ekipamendua: Errorea erregistroa sortzean.');
+            if (!response.ok) throw new Error(data.error || 'Erabiltzaileak: Errorea erregistroa sortzean.');
             return data;
         } catch (error) {
-            console.error('Errorea ekipoa sortzean:', error);
+            console.error('Errorea erabiltzailea sortzean:', error);
             throw error;
         }
     },
 
     // Erregistroa ezabatu
-    async delete(id) {
+    async delete(nan) {
         try {
             const response = await fetch(API_URL, {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ id })
+                body: JSON.stringify({ nan })
             });
             const data = await response.json();
-            if (!response.ok) throw new Error(data.error || 'Ekipamendua: Errorea erregistroa ezabatzean.');
+            if (!response.ok) throw new Error(data.error || 'Erabiltzaileak: Errorea erregistroa ezabatzean.');
             return data;
         } catch (error) {
-            console.error('Errorea ekipoa ezabatzean:', error);
+            console.error('Errorea erabiltzailea ezabatzean:', error);
             throw error;
         }
     }
 };
 
-export default ekipoakService;
+export default erabiltzaileakService;

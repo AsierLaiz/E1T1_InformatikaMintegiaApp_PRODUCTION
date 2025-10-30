@@ -1,3 +1,7 @@
+<?php
+require_once __DIR__ . '/../../src/require_auth.php';
+$CURRENT_USER = require_auth_view('login');
+?>
 <?php require_once "partials/header.html" ?>
 
 <main>
@@ -12,8 +16,8 @@
                 FP Santurtzi LH
             </h2>
 
-            <a href="./perfil.php" class="btn btn-outline-light btn-lg px-5 py-3 rounded-pill shadow-lg text-decoration-none">
-                Ikusi Perfila
+            <a href="./kontua" class="btn btn-outline-light btn-lg px-5 py-3 rounded-pill shadow-lg text-decoration-none">
+                Ikusi Profila
             </a>
         </div>
     </div>

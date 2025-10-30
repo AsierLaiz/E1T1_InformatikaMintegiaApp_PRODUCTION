@@ -1,0 +1,13 @@
+# ARCHIVO NECESARIO PARA EL ROUTEO
+
+RewriteEngine On
+# Ajusta RewriteBase si tu app está en subcarpeta, e.g. /miapp/
+# RewriteBase /
+
+# Si el archivo o carpeta existe, servirlo directamente
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Si no existe, redirigir a index.php
+RewriteRule ^ routes.php [QSA,L]

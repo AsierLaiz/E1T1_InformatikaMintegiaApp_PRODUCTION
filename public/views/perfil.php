@@ -1,3 +1,7 @@
+<?php
+require_once __DIR__ . '/../../src/require_auth.php';
+$CURRENT_USER = require_auth_view('login');
+?>
 <?php require_once "partials/header.html" ?>
 
     <main class="container-fluid text-white vh-100 d-flex align-items-center justify-content-center p-5 container-home">
