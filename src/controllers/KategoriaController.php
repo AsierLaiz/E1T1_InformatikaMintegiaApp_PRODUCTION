@@ -1,7 +1,7 @@
 <?php
 require '../db.php';
 require '../models/Kategoria.php';
-require_once __DIR__ . '/../src/require_auth.php';
+require_once __DIR__ . '/../require_auth.php';
 $CURRENT_USER = require_auth_api();
 
 $db = new DB();
