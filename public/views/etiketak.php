@@ -7,6 +7,8 @@
 <div class="contenedor my-5">
     <div class="contenedorEtiketa">
         <h1 class="mb-5">Etiketak</h1>
+        <!-- Alertak agertzeko hemen -->
+        <div id="alertPlaceholder"></div>
         <form class="p-4 border rounded-3 shadow-sm bg-light">
             <h2 class="mb-5">Etiketa berriak sortu</h2>
             <div class="mb-3">
@@ -51,11 +53,11 @@
         <form id="kokapenaForm">
           <div class="my-3">
             <label for="kokapenaIzena" class="form-label fw-bold">Kokapenaren izena</label>
-            <input type="text" class="form-control" id="kokapenaIzena" placeholder="Sartu kokapenaren izena" required>
+            <input type="text" class="form-control" id="kokapenaIzena" placeholder="Sartu kokapenaren izena" required maxlength="4">
           </div>
           <div class="mb-3">
             <label for="kokapenaTaldea" class="form-label fw-bold">Taldea</label>
-            <input type="text" class="form-control" id="kokapenaTaldea" placeholder="Sartu kokapenaren taldea" required>
+            <input type="text" class="form-control" id="kokapenaTaldea" placeholder="Sartu kokapenaren taldea" maxlength="5">
           </div>
         </form>
       </div>
