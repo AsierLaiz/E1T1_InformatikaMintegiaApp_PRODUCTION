@@ -40,7 +40,7 @@
 
 
 <!-- modala kokaken berria sortzeko -->
-<div class="modal fade" id="kokapenaModal" tabindex="-1" aria-labelledby="kokapenaModalLabel" aria-hidden="true">
+<div class="modal fade" id="kokapenaModal" tabindex="-1" aria-labelledby="kokapenaModalLabel">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">

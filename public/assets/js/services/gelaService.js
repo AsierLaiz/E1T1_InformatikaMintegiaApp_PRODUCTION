@@ -1,6 +1,6 @@
 const API_URL = '../../src/controllers/GelaController.php';
 
-const erabiltzaileakService = {
+const gelaService = {
     // Erregistro guztiak lortu
     async getAll() {
         try {
@@ -14,15 +14,15 @@ const erabiltzaileakService = {
     },
 
     // Erregistro berria sortu
-    async create(nan, izena, abizena, erabiltzailea, pasahitza, rol) {
+    async create(izena, taldea) {
         try {
             const response = await fetch(API_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ nan, izena, abizena, erabiltzailea, pasahitza, rol })
+                body: JSON.stringify({ izena, taldea })
             });
             const data = await response.json();
-            if (!response.ok) throw new Error(data.error || 'Erabiltzaileak: Errorea gela sortzean.');
+            if (!response.ok) throw new Error(data.error || 'Errorea gela sortzean.');
             return data;
         } catch (error) {
             console.error('Errorea gela sortzean:', error);
@@ -48,4 +48,4 @@ const erabiltzaileakService = {
     }
 };
 
-export default erabiltzaileakService;
+export default gelaService;

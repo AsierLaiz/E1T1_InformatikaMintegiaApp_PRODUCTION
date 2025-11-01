@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const option = document.createElement('option');
     option.value = p.id;
     option.textContent = p.izena;
-    select1.appendChild(option);
+    select2.appendChild(option);
   });
 
   select1.addEventListener('change', async (e) => {
