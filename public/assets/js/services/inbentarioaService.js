@@ -14,21 +14,25 @@ const inbentarioaService = {
     },
 
     // Erregistro berria sortu
-    async create(etiketa, idEkipamendu, erosketaData) {
-        try {
-            const response = await fetch(API_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ etiketa, idEkipamendu, erosketaData })
-            });
-            const data = await response.json();
-            if (!response.ok) throw new Error(data.error || 'Inbentarioa: Errorea erregistroa sortzean.');
-            return data;
-        } catch (error) {
-            console.error('Errorea inbentarioa sortzean:', error);
-            throw error;
+    async create(idEkipamendu, idGela, kopurua, erosketaData) {
+    try {
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ idEkipamendu, idGela, kopurua, erosketaData })
+        });
+        
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || 'Errorea sortzean');
         }
-    },
+        return data;
+    } catch (error) {
+        console.error('Errorea inbentarioa sortzean:', error);
+        throw error;
+    }
+},
 
     // Erregistroa ezabatu
     async delete(etiketa) {

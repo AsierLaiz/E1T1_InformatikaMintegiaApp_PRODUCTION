@@ -1,5 +1,6 @@
 import ekipoakService from './services/ekipoakService.js'
 import gelaService from './services/gelaService.js'
+import inbentarioService from './services/inbentarioaService.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
   const produktuak = await ekipoakService.getAll();
@@ -7,7 +8,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   const gelak = await gelaService.getAll();
   const select2 = document.querySelector('#select2');
   const kokapenaForm = document.querySelector('#kokapenaForm');
+  const inbentarioForm = document.querySelector('#inbentarioForm');
 
+  //Ekipoak kargatzeko
   select1.innerHTML = '<option selected disabled hidden>Hautatu ekipoa</option>';
   produktuak.forEach(p => {
     const option = document.createElement('option');
@@ -16,6 +19,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     select1.appendChild(option);
   });
 
+  // kokapenak kargatzeko
   select2.innerHTML = '<option selected disabled hidden>Hautatu kokalekua</option>';
   gelak.forEach(p => {
     const option = document.createElement('option');
@@ -24,21 +28,33 @@ document.addEventListener('DOMContentLoaded', async () => {
     select2.appendChild(option);
   });
 
-  select1.addEventListener('change', async (e) => {
-    const id = e.target.value;
-    if (id && id !== "Hautatu ekipoa") {
-      const produktua = await ekipoakService.getById(id);
-      console.log("Produktu hautatua:", produktua);
-    }
-  });
+  // formulario inbentarioa
+  inbentarioForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
 
-  select2.addEventListener('change', async (e) => {
-    const id = e.target.value;
-    if (id && id !== "Hautatu kokalekua") {
-      const gela = await gelaService.getById(id);
-      console.log("Produktu hautatua:", gela);
-    }
-  });
+  const idEkipamendu = select1.value;
+  const idGela = select2.value;
+  const erosketaData = document.querySelector('#erosketaData').value.trim();
+  const kopurua = parseInt(document.querySelector('#numberInput').value) || 1;
+
+  // Balidazioak
+  if (!idEkipamendu || !idGela || !erosketaData) {
+    showAlert('Bete eremu guztiak', 'danger');
+    return;
+  }
+
+  try {
+    const res = await inbentarioService.create(idEkipamendu, idGela, kopurua, erosketaData);
+
+    console.log("Erregistro sortuak:", res);
+    showAlert(`${kopurua} etiketa sortu dira`, 'success');
+    inbentarioForm.reset();
+
+  } catch (error) {
+    console.error('Errorea sortzean:', error);
+    showAlert('Errorea sortzean', 'danger');
+  }
+});
 
   //hemen kokapen berria sortzen da balidazioekin
   kokapenaForm.addEventListener('submit', async (e) => {
@@ -64,7 +80,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       return;
     }
     try {
-      const berria = await gelaService.create(izena, taldea);
+      await gelaService.create(izena, taldea);
       kokapenaForm.reset();
 
       const kokapenaModal = bootstrap.Modal.getInstance(document.getElementById('kokapenaModal'));

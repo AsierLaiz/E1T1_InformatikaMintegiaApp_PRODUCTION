@@ -9,7 +9,7 @@
         <h1 class="mb-5">Etiketak</h1>
         <!-- Alertak agertzeko hemen -->
         <div id="alertPlaceholder"></div>
-        <form class="p-4 border rounded-3 shadow-sm bg-light">
+        <form id="inbentarioForm" class="p-4 border rounded-3 shadow-sm bg-light">
             <h2 class="mb-5">Etiketa berriak sortu</h2>
             <div class="mb-3">
                 <label for="select1" class="form-label fw-bold">Hautatu ekipoa</label>
@@ -25,8 +25,12 @@
                 </button>
             </div>
             <div class="mb-3">
-                <label for="numberImput" class="form-label fw-bold">Ekipo kopurua</label>
-                <input type="number" id="numberImput" class="form-control"></input>
+              <label for="erosketaData" class="form-label fw-bold">Erosketa data</label>
+              <input type="date" id="erosketaData" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="numberInput" class="form-label fw-bold">Ekipo kopurua</label>
+                <input type="number" id="numberInput" class="form-control"></input>
             </div>
             <div class="d-grid">
                 <button type="submit" class="btn btn-dark">
@@ -62,7 +66,6 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Utzi</button>
         <button type="submit" form="kokapenaForm" class="btn btn-primary">Gorde</button>
       </div>
     </div>
