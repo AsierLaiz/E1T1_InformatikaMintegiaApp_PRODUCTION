@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `ekipamendua` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `izena` varchar(50) NOT NULL,
   `deskribapena` varchar(200) NOT NULL,
   `marka` varchar(20) DEFAULT NULL,
@@ -59,7 +59,7 @@ CREATE TABLE `erabiltzailea` (
 --
 
 CREATE TABLE `gela` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `izena` varchar(4) NOT NULL,
   `taldea` varchar(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -83,7 +83,7 @@ CREATE TABLE `inbentarioa` (
 --
 
 CREATE TABLE `kategoria` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `izena` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
