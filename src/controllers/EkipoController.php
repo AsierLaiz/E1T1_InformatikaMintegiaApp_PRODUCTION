@@ -4,6 +4,7 @@ require '../models/Ekipo.php';
 require_once __DIR__ . '/../require_auth.php';
 $CURRENT_USER = require_auth_api();
 
+// Datu-baserako konexioa
 $db = new DB();
 $db->konektatu();
 $ekipoDB = new Ekipo($db);
@@ -21,13 +22,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $body = json_decode(file_get_contents('php://input'), true) ?: $_POST;
 
-    // Campos obligatorios
+    // Nahitaezko eremuak
     if (!isset($body['izena'], $body['deskribapena'], $body['marka'], $body['modelo'], $body['stock'], $body['idKategoria'])) {
         http_response_code(400);
         echo json_encode(['error' => 'Faltan datos obligatorios']);
         exit();
     }
-
     $res = $ekipoDB->create(
         $body['izena'],
         $body['deskribapena'],

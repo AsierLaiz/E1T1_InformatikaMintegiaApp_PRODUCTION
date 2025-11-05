@@ -4,6 +4,7 @@ require '../models/Kategoria.php';
 require_once __DIR__ . '/../src/require_auth.php';
 $CURRENT_USER = require_auth_api();
 
+// Datu-baserako konexioa
 $db = new DB();
 $db->konektatu();
 $kategoriaDB = new Kategoria($db);
@@ -57,6 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
     exit();
 }
 
-// Otros métodos no permitidos
+// Nahitaezko eremuak
 http_response_code(405);
 echo json_encode(['error' => 'Metodoa ez da onartzen']);

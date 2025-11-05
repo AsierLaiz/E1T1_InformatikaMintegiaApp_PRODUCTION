@@ -7,6 +7,7 @@
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -18,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `3wag2e1`
+-- Datu-basea: `3wag2e1`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ekipamendua`
+-- Taularen egitura: `ekipamendua`
 --
 
 CREATE TABLE `ekipamendua` (
@@ -40,7 +41,7 @@ CREATE TABLE `ekipamendua` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `erabiltzailea`
+-- Taularen egitura: `erabiltzailea`
 --
 
 CREATE TABLE `erabiltzailea` (
@@ -55,7 +56,7 @@ CREATE TABLE `erabiltzailea` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `gela`
+-- Taularen egitura: `gela`
 --
 
 CREATE TABLE `gela` (
@@ -67,7 +68,7 @@ CREATE TABLE `gela` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `inbentarioa`
+-- Taularen egitura: `inbentarioa`
 --
 
 CREATE TABLE `inbentarioa` (
@@ -79,7 +80,7 @@ CREATE TABLE `inbentarioa` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `kategoria`
+-- Taularen egitura: `kategoria`
 --
 
 CREATE TABLE `kategoria` (
@@ -90,7 +91,7 @@ CREATE TABLE `kategoria` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `kokalekua`
+-- Taularen egitura: `kokalekua`
 --
 
 CREATE TABLE `kokalekua` (
@@ -103,7 +104,7 @@ CREATE TABLE `kokalekua` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `remember_tokens`
+-- Taularen egitura: `remember_tokens`
 --
 
 CREATE TABLE `remember_tokens` (
@@ -114,66 +115,66 @@ CREATE TABLE `remember_tokens` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Índices para tablas volcadas
+-- Dumpatutako taulen indizeak
 --
 
 --
--- Indices de la tabla `ekipamendua`
+-- `ekipamendua` taularen indizeak
 --
 ALTER TABLE `ekipamendua`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_kategoria` (`idKategoria`);
 
 --
--- Indices de la tabla `erabiltzailea`
+-- `erabiltzailea` taularen indizeak
 --
 ALTER TABLE `erabiltzailea`
   ADD PRIMARY KEY (`nan`);
 
 --
--- Indices de la tabla `gela`
+-- `gela` taularen indizeak
 --
 ALTER TABLE `gela`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `inbentarioa`
+-- `inbentarioa` taularen indizeak
 --
 ALTER TABLE `inbentarioa`
   ADD PRIMARY KEY (`etiketa`),
   ADD KEY `fk_ekipamendua` (`idEkipamendu`);
 
 --
--- Indices de la tabla `kategoria`
+-- `kategoria` taularen indizeak
 --
 ALTER TABLE `kategoria`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `kokalekua`
+-- `kokalekua` taularen indizeak
 --
 ALTER TABLE `kokalekua`
   ADD PRIMARY KEY (`etiketa`,`hasieraData`),
   ADD KEY `fk_gela` (`idGela`);
 
 --
--- Restricciones para tablas volcadas
+-- Dumpatutako taulen murriztapenak
 --
 
 --
--- Filtros para la tabla `ekipamendua`
+-- `ekipamendua` taularen kanpo-gakoak
 --
 ALTER TABLE `ekipamendua`
   ADD CONSTRAINT `fk_kategoria` FOREIGN KEY (`idKategoria`) REFERENCES `kategoria` (`ID`);
 
 --
--- Filtros para la tabla `inbentarioa`
+-- `inbentarioa` taularen kanpo-gakoak
 --
 ALTER TABLE `inbentarioa`
   ADD CONSTRAINT `fk_ekipamendua` FOREIGN KEY (`idEkipamendu`) REFERENCES `ekipamendua` (`id`);
 
 --
--- Filtros para la tabla `kokalekua`
+-- `kokalekua` taularen kanpo-gakoak
 --
 ALTER TABLE `kokalekua`
   ADD CONSTRAINT `fk_gela` FOREIGN KEY (`idGela`) REFERENCES `gela` (`id`),
@@ -182,4 +183,4 @@ COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;  
