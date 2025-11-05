@@ -49,7 +49,6 @@ $CURRENT_USER = require_auth_view('login');
                         <th scope="col">taldea</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
-                        <th scope="col"></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -68,7 +67,7 @@ $CURRENT_USER = require_auth_view('login');
                         <th scope="col">amaiera data</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
-                        <th scope="col"></th>
+                        
                       </tr>
                     </thead>
                     <tbody>
@@ -103,3 +102,22 @@ $CURRENT_USER = require_auth_view('login');
 
 <script type="module" src="../assets/js/kudeaketa.js"></script>
 <?php require_once "partials/footer.html" ?>
+
+<div class="modal fade" id="kudeaketaModal" tabindex="-1" aria-labelledby="inbentarioaModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header d-flex justify-content-between">
+        <h5 class="modal-title" id="inbentarioaModalLabel">Produktu Inbentariatua</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        ...
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Gorde</button>
+      </div>
+    </div>
+  </div>
+</div>

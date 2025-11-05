@@ -27,11 +27,10 @@ function renderizarKokalekuak(kokalekuak) {
       <td>${p.idGela}</td>
       <td>${p.hasieraData || '-'}</td>
       <td>${p.amaieraData || '-'}</td>
-      <td><button class="btn btn-sm btn-outline-primary btnIkusi"><i class="fa-solid fa-eye"></i></button></td>
-      <td><button class="btn btn-sm btn-outline-secondary btnEditatu"><i class="fa-solid fa-pen-to-square"></i></button></td>
+      <td><button class="btnEditatu btn btn-sm btn-outline-secondary btnEditatu"><i class="fa-solid fa-pen-to-square"></i></button></td>
       <td><button class="btnEzabatu btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i></button></td>
     `;
-    tr.querySelector('.btnIkusi').addEventListener('click', () => ikusiKokalekua(p));
+    tr.querySelector('.btnEditatu').addEventListener('click', () => editatuKokaleku(p));
     tbody.appendChild(tr);
   });
 }
@@ -45,11 +44,11 @@ function renderizarKategoriak(kategoriak) {
     tr.innerHTML = `
       <td>${k.id}</td>
       <td>${k.izena}</td>
-      <td><button class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-eye"></i></button></td>
-      <td><button class="btn btn-sm btn-outline-secondary"><i class="fa-solid fa-pen-to-square"></i></button></td>
+      <td><button class="btnEditatu btn btn-sm btn-outline-secondary"><i class="fa-solid fa-pen-to-square"></i></button></td>
       <td><button class="btnEzabatu btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i></button></td>
 
     `;
+    tr.querySelector('.btnEditatu').addEventListener('click', () => editatuKategoria(k));
     tbody.appendChild(tr);
   });
 }
@@ -64,23 +63,61 @@ function renderizarGelak(gelak) {
       <td>${g.id}</td>
       <td>${g.izena}</td>
       <td>${g.taldea}</td>
-      <td><button class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-eye"></i></button></td>
-      <td><button class="btn btn-sm btn-outline-secondary"><i class="fa-solid fa-pen-to-square"></i></button></td>
+      <td><button class="btnEditatu btn btn-sm btn-outline-secondary"><i class="fa-solid fa-pen-to-square"></i></button></td>
       <td><button class="btnEzabatu btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i></button></td>
 
     `;
+    tr.querySelector('.btnEditatu').addEventListener('click', () => editatuGela(g));
     tbody.appendChild(tr);
   });
 }
 
-//modales
-function ikusi(produktua) {
-  const modalBody = document.querySelector('#inbentarioaModal .modal-body');
+//modales 
+
+function editatuKokaleku(kokalekua) {
+  const modalBody = document.querySelector('#kudeaketaModal .modal-body');
+  modalBody.innerHTML = `
+    <form id="formEditKokaleku">
+      <div class="mb-3">
+        <label class="form-label"><strong>Etiketa</strong></label>
+        <input type="text" class="form-control" id="etiketaInput" value="${kokalekua.etiketa}">
+      </div>
+      <div class="mb-3">
+        <label class="form-label"><strong>Gela ID</strong></label>
+        <input type="text" class="form-control" id="idGelaInput" value="${kokalekua.idGela}">
+      </div>
+      <div class="mb-3">
+        <label class="form-label"><strong>Hasiera data</strong></label>
+        <input type="date" class="form-control" id="hasieraInput" value="${kokalekua.hasieraData || ''}">
+      </div>
+      <div class="mb-3">
+        <label class="form-label"><strong>Amaiera data</strong></label>
+        <input type="date" class="form-control" id="amaieraInput" value="${kokalekua.amaieraData || ''}">
+      </div>
+    </form>
+  `;
+  const modal = new bootstrap.Modal(document.getElementById('kudeaketaModal'));
+  modal.show();
+}
+
+function editatuGela(produktua) {
+  const modalBody = document.querySelector('#kudeaketaModal .modal-body');
   modalBody.innerHTML = `
     <p><strong>Etiketa:</strong> ${produktua.etiketa}</p>
     <p><strong>Ekipamendu ID:</strong> ${produktua.idEkipamendu}</p>
     <p><strong>Erosketa data:</strong> ${produktua.erosketaData}</p>
   `;
-  const modal = new bootstrap.Modal(document.getElementById('inbentarioaModal'));
+  const modal = new bootstrap.Modal(document.getElementById('kudeaketaModal'));
+  modal.show();
+}
+
+function editatuKategoria(produktua) {
+  const modalBody = document.querySelector('#kudeaketaModal .modal-body');
+  modalBody.innerHTML = `
+    <p><strong>Etiketa:</strong> ${produktua.etiketa}</p>
+    <p><strong>Ekipamendu ID:</strong> ${produktua.idEkipamendu}</p>
+    <p><strong>Erosketa data:</strong> ${produktua.erosketaData}</p>
+  `;
+  const modal = new bootstrap.Modal(document.getElementById('kudeaketaModal'));
   modal.show();
 }
