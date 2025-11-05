@@ -6,7 +6,7 @@ class Kokaleku {
     private $db;
 
     public function __construct($db){ $this->db = $db; }
-
+    // Get all kokalekuak
     public function getAll() {
         $emaitza = $this->db->getKonexioa()->query("SELECT * FROM kokalekua");
         if(!$emaitza) die("ERROREA: Ezin izan dira kokalekuak eskuratu.");
@@ -14,7 +14,7 @@ class Kokaleku {
         while($row = $emaitza->fetch_assoc()) $datuak[] = $row;
         return $datuak;
     }
-
+    // Get etiketa eta hasieraData-ren arabera
     public function get($etiketa,$hasieraData){
         $stmt = $this->db->getKonexioa()->prepare("SELECT * FROM kokalekua WHERE etiketa = ? AND hasieraData = ?");
         $stmt->bind_param("ss",$etiketa,$hasieraData);
@@ -55,7 +55,7 @@ class Kokaleku {
         $stmt->close();
         return $emaitza;
     }
-
+    // Kokalekuak ezabatzen ditu
     public function delete($etiketa,$hasieraData){
         $stmt = $this->db->getKonexioa()->prepare("DELETE FROM kokalekua WHERE etiketa = ? AND hasieraData = ?");
         $stmt->bind_param("ss",$etiketa,$hasieraData);

@@ -4,6 +4,7 @@ require '../models/Inbentario.php';
 require_once __DIR__ . '/../require_auth.php';
 $CURRENT_USER = require_auth_api();
 
+// Datu-baserako konexioa
 $db = new DB();
 $db->konektatu();
 $inbentarioDB = new Inbentario($db);

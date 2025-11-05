@@ -4,6 +4,7 @@ require '../models/Ekipo.php';
 require_once __DIR__ . '/../require_auth.php';
 $CURRENT_USER = require_auth_api();
 
+// Datu-baserako konexioa
 $db = new DB();
 $db->konektatu();
 $ekipoDB = new Ekipo($db);
@@ -37,7 +38,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode(['error' => 'Falta dira derrigorrezko datuak']);
         exit();
     }
-
     $res = $ekipoDB->create(
         $body['izena'],
         $body['deskribapena'],
