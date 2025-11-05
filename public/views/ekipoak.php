@@ -5,11 +5,18 @@ $CURRENT_USER = require_auth_view('login');
 <?php require_once "partials/header.html" ?>
 
 <main class="container-fluid text-white d-block align-items-center justify-content-center p-3 p-md-5 container-home">
-  <div class="container bg-light p-5 rounded-2">
+  <div class="container bg-light p-md-5 pt-5 rounded-2">
     <div class="contenedor my-5">
       <h1 class="mb-5 text-dark">Ekipoak</h1>
+      <div class="mb-4 me-3 d-flex justify-content-end">
+        <button class="btn btn-sm btnSumar"><i class="fa-solid fa-plus"></i></button>
+      </div>
+      <div class="input-group mb-4 bilatu">
+        <input type="text" class="form-control bilatuInput" placeholder="Izena, Marka edo Modelo bidez bilatu ...">
+        <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
+      </div>
       <div style="overflow-y: auto; max-height: 500px;">
-        <table class=" table  table-hover" id="tabla-ekipoak">
+        <table class="table table-hover" id="tabla-ekipoak">
           <thead>
             <tr>
               <th scope="col">ID</th>
@@ -18,9 +25,8 @@ $CURRENT_USER = require_auth_view('login');
               <th scope="col">Marka</th>
               <th scope="col">Modeloa</th>
               <th scope="col">Stock</th>
-              <th scope="col">Kategoria ID</th>
-              <th scope="col"></th>
-              <th scope="col"></th>
+              <th scope="col">Kategoria</th>
+              <th scope="col" colspan="3"></th>
             </tr>
           </thead>
           <tbody>

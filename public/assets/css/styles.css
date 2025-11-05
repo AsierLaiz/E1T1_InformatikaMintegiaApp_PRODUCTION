@@ -480,3 +480,16 @@ footer a.text-white-50:hover {
     background-color: #bbd0ea94;
 }
 /* ---------- */
+
+/* SUMAR */
+.btnSumar {
+    border-radius: 100px;
+    padding: 10px 15px;
+    transition: 300ms;
+}
+
+.btnSumar:hover {
+    background-color: #0c1b29;
+    color: white;
+}
+/* ---------- */

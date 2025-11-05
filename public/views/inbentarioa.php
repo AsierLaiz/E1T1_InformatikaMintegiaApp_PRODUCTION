@@ -5,7 +5,7 @@ $CURRENT_USER = require_auth_view('login');
 <?php require_once "partials/header.html" ?>
 
 <main class="container-fluid text-white d-block align-items-center justify-content-center p-3 p-md-5 container-home">
-  <div class="container bg-light p-5 rounded-2">
+  <div class="container bg-light p-md-5 pt-5 rounded-2">
     <div class="contenedor my-5">
       <h1 class="mb-5 text-dark">Inbentarioa</h1>
       <div class="input-group mb-4 bilatu">
@@ -19,9 +19,7 @@ $CURRENT_USER = require_auth_view('login');
               <th scope="col">Etiketa</th>
               <th scope="col">idEkipamendu</th>
               <th scope="col">erosketaData</th>
-              <th scope="col"></th>
-              <th scope="col"></th>
-              <th scope="col"></th>
+              <th scope="col" colspan="3"></th>
             </tr>
           </thead>
           <tbody>
