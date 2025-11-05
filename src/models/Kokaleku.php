@@ -23,7 +23,29 @@ class Kokaleku {
         $stmt->close();
         return $emaitza->num_rows ? $emaitza->fetch_assoc() : null;
     }
-    // Kokaleku berria sortzen du
+
+    public function getByGela($idGela){
+        $stmt = $this->db->getKonexioa()->prepare("SELECT * FROM kokalekua WHERE idGela = ?");
+        $stmt->bind_param("i",$idGela);
+        $stmt->execute();
+        $emaitza = $stmt->get_result();
+        $stmt->close();
+        $datuak = [];
+        while($row = $emaitza->fetch_assoc()) $datuak[] = $row;
+        return $datuak;
+    }
+
+    public function getByEtiketa($etiketa){
+        $stmt = $this->db->getKonexioa()->prepare("SELECT * FROM kokalekua WHERE etiketa = ?");
+        $stmt->bind_param("s",$etiketa);
+        $stmt->execute();
+        $emaitza = $stmt->get_result();
+        $stmt->close();
+        $datuak = [];
+        while($row = $emaitza->fetch_assoc()) $datuak[] = $row;
+        return $datuak;
+    }
+
     public function create($etiketa,$idGela,$hasieraData,$amaieraData){
         $stmt = $this->db->getKonexioa()->prepare(
             "INSERT INTO kokalekua (etiketa,idGela,hasieraData,amaieraData) VALUES (?,?,?,?)"

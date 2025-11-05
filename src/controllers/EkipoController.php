@@ -11,10 +11,21 @@ $ekipoDB = new Ekipo($db);
 
 header('Content-Type: application/json; charset=utf-8');
 
-// GET: bueltatu equipo guztiak
+// GET: bueltatu ekipo guztiak edo bakarra ID bidez
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $data = $ekipoDB->getAll();
-    echo json_encode($data);
+    if (isset($_GET['id'])) {
+        $id = intval($_GET['id']);
+        $data = $ekipoDB->get($id);
+        if ($data) {
+            echo json_encode($data);
+        } else {
+            http_response_code(404);
+            echo json_encode(['error' => 'Ez da aurkitu']);
+        }
+    } else {
+        $data = $ekipoDB->getAll();
+        echo json_encode($data);
+    }
     exit();
 }
 
@@ -22,10 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $body = json_decode(file_get_contents('php://input'), true) ?: $_POST;
 
-    // Nahitaezko eremuak
     if (!isset($body['izena'], $body['deskribapena'], $body['marka'], $body['modelo'], $body['stock'], $body['idKategoria'])) {
         http_response_code(400);
-        echo json_encode(['error' => 'Faltan datos obligatorios']);
+        echo json_encode(['error' => 'Falta dira derrigorrezko datuak']);
         exit();
     }
     $res = $ekipoDB->create(
@@ -46,13 +56,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit();
 }
 
-// DELETE: kendu equipo
+// DELETE: kendu ekipoa
 if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
     $body = json_decode(file_get_contents('php://input'), true) ?: $_GET;
 
     if (!isset($body['id'])) {
         http_response_code(400);
-        echo json_encode(['error' => 'Falta el campo id']);
+        echo json_encode(['error' => 'ID falta da']);
         exit();
     }
 
