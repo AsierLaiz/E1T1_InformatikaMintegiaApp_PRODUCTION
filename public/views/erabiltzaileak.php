@@ -37,7 +37,7 @@ $CURRENT_USER = require_admin_view('login', 'home');
   </div>
 </main>
 <script type="module" src="../assets/js/erabiltzaileak.js"></script>
-<?php require_once "partials/footer.html" ?>
+<?php require_once "partials/footer.php" ?>
 
 
 <div class="modal fade" id="erabiltzaileakModal" tabindex="-1" aria-labelledby="erabiltzaileakModalLabel" aria-hidden="true">

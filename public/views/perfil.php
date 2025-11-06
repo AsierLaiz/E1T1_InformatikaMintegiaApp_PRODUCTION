@@ -49,6 +49,6 @@ $CURRENT_USER = require_auth_view('login');
         </div>
     </main>
 
-<?php require_once "partials/footer.html" ?>
+<?php require_once "partials/footer.php" ?>
 
 <script src="../assets/js/profileLoad.js"></script>

@@ -38,7 +38,7 @@ $CURRENT_USER = require_auth_view('login');
   </div>
 </main>
 <script type="module" src="../assets/js/ekipoak.js"></script>
-<?php require_once "partials/footer.html" ?>
+<?php require_once "partials/footer.php" ?>
 
 
 <div class="modal fade" id="ekipoakModal" tabindex="-1" aria-labelledby="ekipoakModalLabel" aria-hidden="true">

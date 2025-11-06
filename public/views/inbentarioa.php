@@ -30,7 +30,7 @@ $CURRENT_USER = require_auth_view('login');
   </div>
 </main>
 <script type="module" src="../assets/js/inbentarioa.js"></script>
-<?php require_once "partials/footer.html" ?>
+<?php require_once "partials/footer.php" ?>
 
 <div class="modal fade" id="inbentarioaModal" tabindex="-1" aria-labelledby="inbentarioaModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">

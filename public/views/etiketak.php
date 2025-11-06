@@ -75,4 +75,4 @@
 
 </div>
 <script type="module" src="../assets/js/etiketak.js"></script>
-<?php require_once "partials/footer.html" ?>
+<?php require_once "partials/footer.php" ?>
