@@ -59,9 +59,9 @@ function renderizarTabla(ekipoak) {
             <td>${e.idKategoria}</td>
             <td>
                 <div class="d-flex gap-3 justify-content-end"> 
-                    <button class="btnIkusi btn btn-sm btn-warning"><i class="fa-solid fa-eye"></i></button>
-                    <button class="btnEditatu btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square"></i></button>
-                    <button class="btnEzabatu btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i></button>
+                    <button class="btnIkusi btn btn-sm btn-warning" alt='Informazio gehiago'><i class="fa-solid fa-eye"></i></button>
+                    <button class="btnEditatu btn btn-sm btn-warning" alt='Editatu objektua'><i class="fa-solid fa-pen-to-square"></i></button>
+                    <button class="btnEzabatu btn btn-sm btn-danger" alt='Ezabatu objektua'><i class="fa-solid fa-trash"></i></button>
                 </div>
             </td>
     `;

@@ -10,7 +10,7 @@ $CURRENT_USER = require_admin_view('login', 'home');
     <div class="contenedor my-5">
       <h1 class="mb-3 text-dark">Erabiltzaileak</h1>
       <div class="mb-4 me-3 d-flex justify-content-end">
-        <button class="btn btn-sm btnSumar" id="sumarErabiltzaile"><i class="fa-solid fa-plus"></i></button>
+        <button class="btn btn-sm btnSumar" id="sumarErabiltzaile" alt="Sortu erabiltzaile berria"><i class="fa-solid fa-plus"></i></button>
       </div>
       <div class="input-group mb-4 bilatu">
         <input type="text" class="form-control bilatuInput" placeholder="NAN, Izena edo Erabiltzaile bidez bilatu ...">

@@ -9,7 +9,7 @@ $CURRENT_USER = require_auth_view('login');
     <div class="contenedor my-5">
       <h1 class="mb-3 text-dark">Ekipoak</h1>
       <div class="mb-4 me-3 d-flex justify-content-end">
-        <button class="btn btn-sm btnSumar" id="sumarEkipo"><i class="fa-solid fa-plus"></i></button>
+        <button class="btn btn-sm btnSumar" id="sumarEkipo" alt="Sortu ekipo berria"><i class="fa-solid fa-plus"></i></button>
       </div>
       <div class="input-group mb-4 bilatu">
         <input type="text" class="form-control bilatuInput" placeholder="Izena, Marka edo Modelo bidez bilatu ...">
