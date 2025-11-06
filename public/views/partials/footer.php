@@ -16,8 +16,10 @@
                     <h5 class="text-uppercase mb-4 font-weight-bold text-light">Lotura Azkarrak</h5>
                     <p><a class="text-white-50 text-decoration-none" href="./inbentarioa" alt="Inbentariora joan">Inbentarioa</a></p>
                     <p><a class="text-white-50 text-decoration-none" href="./ekipoak" alt="Ekipoak joan">Ekipoak</a></p>
-                    <p><a class="text-white-50 text-decoration-none" href="./erosketak" alt="Erosketara joan">Erosketak</a></p>
-                    <p><a class="text-white-50 text-decoration-none" href="./kokalekua" alt="Kokalekura joan">Kokalekua</a></p>
+                    <p><a class="text-white-50 text-decoration-none" href="./kudeaketa" alt="Kudeaketara joan">Kudeaketa</a></p>
+                    <?php if (isset($CURRENT_USER['rola']) && $CURRENT_USER['rola'] === 'A'): ?>
+                        <p><a class="text-white-50 text-decoration-none" href="./erabiltzaileak" alt="Erabiltzaileetara joan">Erabiltzaileak</a></p>
+                    <?php endif; ?>
                     <p><a href="./kontua" class="text-white-50 text-decoration-none" alt="Nire kontura joan">Nire kontua</a></p>
                 </div>
 

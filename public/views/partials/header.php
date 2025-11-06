@@ -42,10 +42,7 @@
                     <a class="nav-link" href="./ekipoak" alt="Ekipoetara joan">Ekipoak</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./erosketak" alt="Erosketara joan">Erosketak</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="./kokalekua" alt="Kokalekura joan">Kokalekua</a>
+                    <a class="nav-link" href="./kudeaketa" alt="Kudeaketara joan">Kudeaketa</a>
                 </li>
                 <?php if (isset($CURRENT_USER['rola']) && $CURRENT_USER['rola'] === 'A'): ?>
                     <li class="nav-item">
