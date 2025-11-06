@@ -67,10 +67,10 @@
                             <i class="fas fa-times x-cerrar-pront"></i>
                         </button>
                         <div class="d-block mb-3"></div>
-                        <a href="./kontua" class="btn btn-primary w-100 mb-2">
+                        <a href="./kontua" class="btn btn-primary btnPerf w-100 mb-2">
                             <i class="fas fa-user me-1"></i>Nire kontua
                         </a>
-                        <a id="logoutBtnMenu" class="btn btn-danger w-100">
+                        <a id="logoutBtnMenu" class="btn btn-danger w-100 btnSaiItx">
                             <i class="fas fa-sign-out-alt me-1"></i> Saioa Itxi
                         </a>
                     </div>

@@ -37,6 +37,15 @@ body {
 /* ----------- */
 
 /* HEADER */
+.btnPerf {
+    background-color: #0b5ed7 !important;
+    border: none !important;
+}
+
+.btnPerf:hover {
+    background-color: #064ab1 !important;
+}
+
 header .navbar {
     background-color: white !important; 
     box-shadow: 0px 0px 8px 0px #000000 !important;
@@ -307,6 +316,7 @@ footer a.text-white-50:hover {
 
 .btnHome {
     background-color: #224461;
+    font-size: 1.2rem;
     color: white;
     transition: 300ms;
 }
@@ -503,3 +513,15 @@ footer a.text-white-50:hover {
     color: white;
 }
 /* ---------- */
+
+/* BOTOIA */
+.btnSaiItx {
+    background-color: rgb(228, 56, 56) !important;
+    border: none !important;
+    transition: 300ms;
+}
+
+.btnSaiItx:hover {
+    background-color: rgb(187, 32, 32) !important;
+}
+/* --------- */

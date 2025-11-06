@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../../src/require_auth.php';
 $CURRENT_USER = require_admin_view('login', 'home');
 ?>
-<?php require_once "partials/header.html" ?>
+<?php require_once "partials/header.php" ?>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 <main class="container-fluid text-white d-block align-items-center justify-content-center p-3 p-md-5 container-home">
