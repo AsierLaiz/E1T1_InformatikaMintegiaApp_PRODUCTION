@@ -57,31 +57,7 @@ class Inbentario {
         return 'E' . str_pad($num, 4, '0', STR_PAD_LEFT);
     }
 
-    // SELECT i.idEkipamendu, e.stock FROM ekipamendua e INNER JOIN inbentarioa i ON e.id = i.idEkipamendu; quiero que en esta consulta se cuenten los registros que hay en inbentarioa con el mismo idEkipamendu y se resten de e.stock en otra columna nueva
-    public function getEtiketatuGabeak() {
-        $query = "
-            SELECT 
-                e.id AS idEkipamendu, 
-                e.stock AS totalStock, 
-                COUNT(i.idEkipamendu) AS etiketatuak,
-                (e.stock - COUNT(i.idEkipamendu)) AS etiketatu_gabe
-            FROM 
-                ekipamendua e
-            LEFT JOIN 
-                inbentarioa i ON e.id = i.idEkipamendu
-            GROUP BY 
-                e.id, e.stock
-        ";
-        $emaitza = $this->db->getKonexioa()->query($query);
-        if(!$emaitza) die("ERROREA: Ezin izan da stocka eta inbentario kontaketa eskuratu.");
-        $datuak = [];
-        while($row = $emaitza->fetch_assoc()) {
-            $datuak[] = $row;
-        }
-        return $datuak;
-    }
-
-    // Devuelve el número de etiketatu_gabe para un idEkipamendu. Hace FOR UPDATE para bloquear.
+    // Bueltatzen du idEkipamendu-rako etiketatu_gabe kopurua.
     public function getEtiketatuGabeById($idEkipamendu) {
         $conn = $this->db->getKonexioa();
         $id = intval($idEkipamendu);
