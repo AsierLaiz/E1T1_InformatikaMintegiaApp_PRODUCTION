@@ -304,6 +304,16 @@ footer a.text-white-50:hover {
 .subtitle-home {
     color: #7cc4ff;
 }
+
+.btnHome {
+    background-color: #224461;
+    color: white;
+    transition: 300ms;
+}
+
+.btnHome:hover {
+    background-color: #142738 !important;
+}
 /* ------------- */
 
 /* PERFIL */
