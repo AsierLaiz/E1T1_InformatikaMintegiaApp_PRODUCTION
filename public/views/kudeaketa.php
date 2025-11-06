@@ -102,7 +102,7 @@ $CURRENT_USER = require_auth_view('login');
 
 
 <!-- Editatzeko modal -->
-<div class="modal fade" id="kudeaketaModal" tabindex="-1" aria-labelledby="inbentarioaModalLabel" aria-hidden="true">
+<div class="modal fade" id="kudeaketaModal" data-mota="" tabindex="-1" aria-labelledby="inbentarioaModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header d-flex justify-content-between">
@@ -113,7 +113,7 @@ $CURRENT_USER = require_auth_view('login');
         <!-- modalaren edulia hemen agertzen da -->
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Gorde</button>
+        <button id="btnGorde" type="button" class="btn btn-primary">Gorde</button>
       </div>
     </div>
   </div>

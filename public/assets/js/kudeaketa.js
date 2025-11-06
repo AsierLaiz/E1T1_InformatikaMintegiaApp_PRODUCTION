@@ -21,6 +21,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 });
 
+//TAULAK
+
 //Taula kokalekua
 function renderizarKokalekuak(kokalekuak) {
   const tbody = document.querySelector('#tabla-kokalekuak tbody');
@@ -97,6 +99,10 @@ function renderizarGelak(gelak) {
 
 //Modal kokaleku
 function editatuKokaleku(kokalekua) {
+  const modalElement = document.getElementById('kudeaketaModal');
+  modalElement.dataset.mota = 'gela';
+  const modal = new bootstrap.Modal(modalElement);
+
   const modalTitle = document.querySelector('#inbentarioaModalLabel');
   modalTitle.textContent = 'Kokalekua editatu';
 
@@ -130,16 +136,19 @@ function editatuKokaleku(kokalekua) {
     if (g.id === kokalekua.idGela) option.selected = true;
     select.appendChild(option);
   });
-  //blur focus-a kentzeko modalaren barruan dauden elementuetik eskuragarritasun abisua ez ateratzeko
-  document.activeElement.blur();
-  const modal = new bootstrap.Modal(document.getElementById('kudeaketaModal'));
+
   modal.show();
 }
 
 //Modal gela
 function editatuGela(gela) {
+  const modalElement = document.getElementById('kudeaketaModal');
+  modalElement.dataset.mota = 'gela';
+  const modal = new bootstrap.Modal(modalElement);
+
   const modalTitle = document.querySelector('#inbentarioaModalLabel');
   modalTitle.textContent = 'Gela editatu';
+
 
   const modalBody = document.querySelector('#kudeaketaModal .modal-body');
   modalBody.innerHTML = `
@@ -158,13 +167,16 @@ function editatuGela(gela) {
       </div>
     </form>
   `;
-  const modal = new bootstrap.Modal(document.getElementById('kudeaketaModal'));
-  document.activeElement.blur();
+
   modal.show();
 }
 
 //Modal Kategoria
 function editatuKategoria(kategoria) {
+  const modalElement = document.getElementById('kudeaketaModal');
+  modalElement.dataset.mota = 'gela';
+  const modal = new bootstrap.Modal(modalElement);
+
   const modalTitle = document.querySelector('#inbentarioaModalLabel');
   modalTitle.textContent = 'Kategoria editatu';
 
@@ -190,31 +202,27 @@ function editatuKategoria(kategoria) {
     select.appendChild(option);
   });
 
-
-  const modal = new bootstrap.Modal(document.getElementById('kudeaketaModal'));
-  document.activeElement.blur();
   modal.show();
 }
 
 //Modal ezabatzeko konfirmazioa
 function confirmEzabatuModal(item) {
   const modalTitle = document.querySelector('#ezabatuModalLabel');
-  if(item.etiketa){
+  if (item.etiketa) {
     modalTitle.textContent = `${item.izena} kokalekua ezabatuko duzu`;
-  }else if(item.taldea){
+  } else if (item.taldea) {
     modalTitle.textContent = `${item.izena} gela ezabatuko duzu`;
-  }else{
+  } else {
     modalTitle.textContent = `${item.izena} kategoria ezabatuko duzu`;
   }
 
   const modal = new bootstrap.Modal(document.getElementById('ezabatuModal'));
-  document.activeElement.blur();
   modal.show();
 
   const confirmBtn = document.querySelector('#confirmEzabatuBtn');
   confirmBtn.onclick = async () => {
     try {
-       if (item.etiketa) {
+      if (item.etiketa) {
         await kokalekuService.delete(item.id);
       } else if (item.taldea) {
         await gelaService.delete(item.id);
@@ -224,9 +232,61 @@ function confirmEzabatuModal(item) {
 
       modal.hide();
       location.reload();
-      
+
     } catch (errorea) {
       console.error('Errorea elementua ezabatzean:', errorea);
     }
   };
 }
+
+
+//EKINTZAK
+
+//Editatutako datuak gordetzeko
+//Mota bidez ze Service deitzen den erabakitzen da
+async function gordeDatuak() {
+  const modalElement = document.getElementById('kudeaketaModal');
+  const mota = modalElement.dataset.mota;
+
+  try {
+    if (mota === 'gela') {
+      await gordeGela();
+    } else if (mota === 'kokaleku') {
+      await gordeKokalekua();
+    } else if (mota === 'kategoria') {
+      await gordeKategoria();
+    }
+
+    const modal = bootstrap.Modal.getInstance(document.getElementById('kudeaketaModal'));
+    modal.hide();
+    location.reload();
+  } catch (errorea) {
+    console.error('Errorea datuak gordetzean:', errorea);
+    alert('Errorea datuak gordetzean');
+  }
+}
+
+
+async function gordeGela() {
+  const id = document.querySelector('#idGelaInput').value;
+  const izena = document.querySelector('#izenaInput').value.trim();
+  const taldea = document.querySelector('#taldeaInput').value.trim();
+  await gelaService.update(id, { izena, taldea });
+}
+
+async function gordeKokalekua() {
+  const etiketa = document.querySelector('#etiketaInput').value;
+  const idGela = document.querySelector('#idGelaInput').value;
+  const hasieraData = document.querySelector('#hasieraInput').value;
+  const amaieraData = document.querySelector('#amaieraInput').value;
+  await kokalekuService.update(etiketa, { idGela, hasieraData, amaieraData });
+}
+
+async function gordeKategoria() {
+  const id = document.querySelector('#idKategoriaInput').value;
+  const izena = document.querySelector('#select2').value;
+  await kategoriaService.update(id, { izena });
+}
+
+document.querySelector('#btnGorde').addEventListener('click', gordeDatuak);
+

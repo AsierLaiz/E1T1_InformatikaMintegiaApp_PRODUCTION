@@ -13,6 +13,16 @@ const gelaService = {
         }
     },
 
+    async update(id, data) {
+        const res = await fetch(`${API_URL}?id=${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+        if (!res.ok) throw new Error('Errorea gela eguneratzean');
+        return await res.json();
+    },
+
     // Erregistro berria sortu
     async create(izena, taldea) {
         try {
@@ -31,12 +41,12 @@ const gelaService = {
     },
 
     // Erregistroa ezabatu
-    async delete(nan) {
+    async delete(id) {
         try {
             const response = await fetch(API_URL, {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ nan })
+                body: JSON.stringify({ id })
             });
             const data = await response.json();
             if (!response.ok) throw new Error(data.error || 'Gela: Errorea erregistroa ezabatzean.');
