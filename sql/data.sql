@@ -81,8 +81,9 @@ INSERT INTO erabiltzailea (nan,izena,abizena,erabiltzailea,pasahitza,rola) VALUE
 ('23456789B','Asier','Laiz','alaiz','alaiz','A'),
 ('34567890C','Ainara','Diaz','adiaz','adiaz','A'),
 ('45678901D','Asier','Peña','apena','apena','A'),
-('56789012E','Iker','Etxeberria','ietxeberria','ietxeberria','U'),
-('67890123F','Maite','Olazabal','molazabal','molazabal','U'),
-('78901234G','Jon','Goikoetxea','jgoikoetxea','jgoikoetxea','U');
+('56789012E','Jon','Igual','jigual','jigual','A'),
+('67890123F','Egoitz','Gallaga','egallaga','egallaga','U'),
+('78901234G','Jon','Quintano','jquintano','jquintano','U'),
+('89012345H','Jon','Ibarra','jibarra','jibarra','U');
 
 COMMIT;

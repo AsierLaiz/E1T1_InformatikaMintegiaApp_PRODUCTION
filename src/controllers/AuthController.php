@@ -81,7 +81,7 @@ if ($method === 'POST' && $action === 'login') {
         } catch (Exception $e) {
             $token = bin2hex(openssl_random_pseudo_bytes(32));
         }
-        $expira_ts = time() + (30 * 24 * 60 * 60);
+        $expira_ts = time() + (7 * 24 * 60 * 60);
         $expira = date('Y-m-d H:i:s', $expira_ts);
         $model->createRememberToken($u['nan'], $token, $expira);
         // secure flags: mark secure = false, http lokalean lan egiten baduzu; ekoizpenean pon true
