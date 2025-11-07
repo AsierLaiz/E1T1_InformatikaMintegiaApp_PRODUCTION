@@ -1,7 +1,7 @@
 START TRANSACTION;
 SET time_zone = "+00:00";
 
--- Insertar categorías (id auto-increment: 1..7)
+-- Kategoriak txertatu (id auto-increment: 1.. 7)
 INSERT INTO kategoria (id,izena) VALUES
 (1, 'Ordenagailua'),
 (2, 'Portatila'),
@@ -11,7 +11,7 @@ INSERT INTO kategoria (id,izena) VALUES
 (6, 'Router'),
 (7, 'Beste batzuk');
 
--- Insertar aulas/gela (id auto-increment 1..9)
+-- Gelak txertatu (id auto-increment 1.. 9)
 INSERT INTO gela (id,izena,taldea) VALUES
 (1, 'A203', '2MSS1A'),
 (2, 'A205', '2MSS1B'),
@@ -23,7 +23,7 @@ INSERT INTO gela (id,izena,taldea) VALUES
 (8, 'A207', '3WAG2'),
 (9, 'A201', '4IAB1');
 
--- Insertar equipamiento (id auto-increment empezando en 1)
+-- Ekipamendua txertatu (id auto-increment, 1ean hasita)
 INSERT INTO ekipamendua (id,izena,deskribapena,marka,modelo,stock,idKategoria) VALUES
 (1, 'PC_Torre_Asus_1', 'Torre Asus básica. CPU i3, 8GB RAM, 256GB SSD.', 'Asus', 'Basic-i3', 10, 1),
 (2, 'PC_Torre_Asus_2', 'Torre Asus básica. CPU i5, 16GB RAM, 512GB SSD.', 'Asus', 'Basic-i5', 5, 1),
@@ -38,7 +38,7 @@ INSERT INTO ekipamendua (id,izena,deskribapena,marka,modelo,stock,idKategoria) V
 (11,'Router_Linksys_1','Router Linksys para red aula.', 'Linksys', 'LR100', 3, 6),
 (12,'Monitor_BrandX_1','Monitor 24" (categoria: Beste batzuk).', 'BrandX', 'M24', 12, 7);
 
--- Insertar inbentarioa (etiquetas únicas) con fechas de compra recientes aleatorias
+-- Inbentarioa txertatu (etiketa bakarrak), ausazko erosketa-data berriekin
 INSERT INTO inbentarioa (etiketa,idEkipamendu,erosketaData) VALUES
 ('E0001', 1, '2024-11-15'),
 ('E0002', 1, '2025-03-02'),
@@ -55,8 +55,8 @@ INSERT INTO inbentarioa (etiketa,idEkipamendu,erosketaData) VALUES
 ('E0013',11, '2025-02-14'),
 ('E0014',12, '2025-08-21');
 
--- Insertar kokalekua (FK a inbentarioa.etiketa y gela.id)
--- hasieraData = 2025-10-20, amaieraData = 2026-06-05 según instrucciones
+-- Kokalekua txertatu (FK inbentarioa.etiketa eta gela.id)
+-- hasieraData = 2025-10-20, amaieraData = 2026-06-05, jarraibideen arabera
 INSERT INTO kokalekua (etiketa,idGela,hasieraData,amaieraData) VALUES
 ('E0001', 1, '2025-10-20', '2026-06-05'),
 ('E0002', 1, '2025-10-20', '2026-06-05'),
@@ -73,16 +73,17 @@ INSERT INTO kokalekua (etiketa,idGela,hasieraData,amaieraData) VALUES
 ('E0013', 3, '2025-10-20', '2026-06-05'),
 ('E0014', 1, '2025-10-20', '2026-06-05');
 
--- Insertar usuarios (erabiltzailea)
--- Regla: erabiltzailea = primera letra del nombre + apellido completo; pasahitza = mismo valor.
--- Roles: 'A' = admin, 'U' = user.
+-- Erabiltzaileak txertatu (erabiltzailea)
+-- Araua: erabiltzailea = izenaren lehen letra + abizen osoa; pasahitza = balio bera.
+-- Rolak: 'A' = admin, 'U' = user.
 INSERT INTO erabiltzailea (nan,izena,abizena,erabiltzailea,pasahitza,rola) VALUES
 ('12345678A','Gorka','Lopez','glopez','glopez','A'),
 ('23456789B','Asier','Laiz','alaiz','alaiz','A'),
 ('34567890C','Ainara','Diaz','adiaz','adiaz','A'),
 ('45678901D','Asier','Peña','apena','apena','A'),
-('56789012E','Iker','Etxeberria','ietxeberria','ietxeberria','U'),
-('67890123F','Maite','Olazabal','molazabal','molazabal','U'),
-('78901234G','Jon','Goikoetxea','jgoikoetxea','jgoikoetxea','U');
+('56789012E','Jon','Igual','jigual','jigual','A'),
+('67890123F','Egoitz','Gallaga','egallaga','egallaga','U'),
+('78901234G','Jon','Quintano','jquintano','jquintano','U'),
+('89012345H','Jon','Ibarra','jibarra','jibarra','U');
 
 COMMIT;

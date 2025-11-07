@@ -1,14 +1,14 @@
-const API_URL = '../../src/controllers/InbentarioController.php';
+const API_URL = '../../src/controllers/EtiketakController.php';
 
-const inbentarioaService = {
+const etiketakService = {
     // Erregistro guztiak lortu
     async getAll() {
         try {
             const response = await fetch(API_URL, { method: 'GET' });
-            if (!response.ok) throw new Error('Inbentarioa: Errorea datuak lortzean.');
+            if (!response.ok) throw new Error('Gelak: Errorea datuak lortzean.');
             return await response.json();
         } catch (error) {
-            console.error('Errorea inbentarioa lortzean:', error);
+            console.error('Errorea etiketak lortzean:', error);
             return [];
         }
     },
@@ -23,28 +23,28 @@ const inbentarioaService = {
             const response = await fetch(url, { method: 'GET' });
             const data = await response.json();
             if (!response.ok) {
-                throw new Error(data.error || 'Inbentarioa: Errorea inbentarioa lortzean.');
+                throw new Error(data.error || 'Etiketak: Errorea etiketak lortzean.');
             }
             return data;
         } catch (error) {
-            console.error(`Errorea inbentarioa (etiketa=${etiketa}) lortzean:`, error);
+            console.error(`Errorea etiketak (etiketa=${etiketa}) lortzean:`, error);
             throw error;
         }
     },
 
     // Erregistro berria sortu
-    async create(etiketa, idEkipamendu, erosketaData) {
+    async create(idEkipamendu, idGela, kopurua, erosketaData, hasieraData, amaieraData) {
         try {
             const response = await fetch(API_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ etiketa, idEkipamendu, erosketaData })
+                body: JSON.stringify({ idEkipamendu, idGela, kopurua, erosketaData, hasieraData, amaieraData })
             });
             const data = await response.json();
-            if (!response.ok) throw new Error(data.error || 'Inbentarioa: Errorea erregistroa sortzean.');
+            if (!response.ok) throw new Error(data.error || 'Gelak: Errorea erregistroa sortzean.');
             return data;
         } catch (error) {
-            console.error('Errorea inbentarioa sortzean:', error);
+            console.error('Errorea etiketa sortzean:', error);
             throw error;
         }
     },
@@ -58,13 +58,13 @@ const inbentarioaService = {
                 body: JSON.stringify({ etiketa })
             });
             const data = await response.json();
-            if (!response.ok) throw new Error(data.error || 'Inbentarioa: Errorea erregistroa ezabatzean.');
+            if (!response.ok) throw new Error(data.error || 'Etiketak: Errorea erregistroa ezabatzean.');
             return data;
         } catch (error) {
-            console.error('Errorea inbentarioa ezabatzean:', error);
+            console.error('Errorea etiketa ezabatzean:', error);
             throw error;
         }
     }
 };
 
-export default inbentarioaService;
+export default etiketakService;

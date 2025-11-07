@@ -7,6 +7,7 @@ class Gela {
 
     public function __construct($db) { $this->db = $db; }
 
+    // Get all gelak
     public function getAll() {
         $emaitza = $this->db->getKonexioa()->query("SELECT * FROM gela");
         if(!$emaitza) die("ERROREA: Ezin izan dira gelak eskuratu.");
@@ -14,7 +15,7 @@ class Gela {
         while($row = $emaitza->fetch_assoc()) $datuak[] = $row;
         return $datuak;
     }
-
+    // Get id-aren arabera
     public function get($id){
         $stmt = $this->db->getKonexioa()->prepare("SELECT * FROM gela WHERE id = ?");
         $stmt->bind_param("i",$id);
@@ -23,7 +24,7 @@ class Gela {
         $stmt->close();
         return $emaitza->num_rows ? $emaitza->fetch_assoc() : null;
     }
-
+    // Gela berria sortzen du 
     public function create($izena, $taldea){
         $stmt = $this->db->getKonexioa()->prepare(
             "INSERT INTO gela (izena, taldea) VALUES (?, ?)"
@@ -33,7 +34,7 @@ class Gela {
         $stmt->close();
         return $emaitza;
     }
-
+    // Gelak ezabatzen ditu
     public function delete($id){
         $stmt = $this->db->getKonexioa()->prepare("DELETE FROM gela WHERE id = ?");
         $stmt->bind_param("i",$id);

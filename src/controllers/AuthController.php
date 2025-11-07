@@ -3,17 +3,19 @@ require_once __DIR__ . '/../db.php';
 require_once __DIR__ . '/../models/Erabiltzaile.php';
 
 header('Content-Type: application/json; charset=utf-8');
-
+// Datu-baserako konexioa
 $db = new DB();
 $db->konektatu();
 $model = new Erabiltzaile($db);
 
+// Helpers erantzunak JSON
 function json_err($msg, $code = 400) {
     http_response_code($code);
     echo json_encode(['error' => $msg]);
     exit();
 }
 
+// Erantzun orokorra
 function json_ok($data = [], $code = 200) {
     http_response_code($code);
     echo json_encode($data);
@@ -23,16 +25,16 @@ function json_ok($data = [], $code = 200) {
 $action = $_GET['action'] ?? null;
 $method = $_SERVER['REQUEST_METHOD'];
 
-// Helper: reconstruir sesión desde cookie remember_me si procede
+// Helper: saioa berreraiki cookie remember_me erabiliz, hala badagokio
 function tryRebuildSessionFromCookie($model) {
     if (session_status() !== PHP_SESSION_ACTIVE) session_start();
-    if (!empty($_SESSION['user'])) return; // ya hay sesión
+    if (!empty($_SESSION['user'])) return; 
 
     if (!empty($_COOKIE['remember_me'])) {
         $token = $_COOKIE['remember_me'];
         $u = $model->validateRememberToken($token);
         if ($u) {
-            // Reconstruir session user (sin pasahitza)
+            // Session user berreraiki (pasahitzik gabe)
             $_SESSION['user'] = [
                 'nan' => $u['nan'],
                 'izena' => $u['izena'],
@@ -41,13 +43,13 @@ function tryRebuildSessionFromCookie($model) {
                 'rola' => $u['rola']
             ];
         } else {
-            // token inválido o expirado -> borrar cookie por seguridad
+            // token baliogabea edo iraungia -> cookiea ezabatu segurtasunagatik
             setcookie('remember_me', '', time() - 3600, '/', '', true, true);
         }
     }
 }
 
-// Reconstruir sesión automáticamente en cada petición si cabe
+// Saioa automatikoki berreraiki eskaera bakoitzean, hala badagokio
 tryRebuildSessionFromCookie($model);
 
 // Login
@@ -72,19 +74,18 @@ if ($method === 'POST' && $action === 'login') {
         'rola' => $u['rola']
     ];
 
-    // Remember-me: generar token, guardar en BD y cookie
+    // Remember-me: token sortu, BDn gorde eta cookie
     if ($remember) {
         try {
-            $token = bin2hex(random_bytes(32)); // 64 hex chars
+            $token = bin2hex(random_bytes(32)); 
         } catch (Exception $e) {
-            // fallback
             $token = bin2hex(openssl_random_pseudo_bytes(32));
         }
-        $expira_ts = time() + (30 * 24 * 60 * 60); // 30 días
+        $expira_ts = time() + (7 * 24 * 60 * 60);
         $expira = date('Y-m-d H:i:s', $expira_ts);
         $model->createRememberToken($u['nan'], $token, $expira);
-        // secure flags: mark secure=false si trabajas en http local; en producción pon true
-        // COMENTAR YA QUE DE MOMENTO NO HAY HTTPS $secure = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off');
+        // secure flags: mark secure = false, http lokalean lan egiten baduzu; ekoizpenean pon true
+        // ESAN ORAINGOZ EZ DAGOELA HTTPS $secure = (! empty ($_SERVER ['HTTPS']) & & $_SERVER ['HTTPS']! = = 'off');
         setcookie('remember_me', $token, $expira_ts, '/', '', false, true);
     }
 
@@ -96,7 +97,7 @@ if ($method === 'POST' && $action === 'login') {
 if ($method === 'POST' && $action === 'logout') {
     if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 
-    // Borrar token en BD si existe cookie
+    // Ezabatu token BDn cookierik badago
     if (!empty($_COOKIE['remember_me'])) {
         $model->deleteRememberToken($_COOKIE['remember_me']);
         setcookie('remember_me', '', time() - 3600, '/', '', false, true);

@@ -1,6 +1,6 @@
 const API_URL = '../../src/controllers/GelaController.php';
 
-const gelaService = {
+const gelakService = {
     // Erregistro guztiak lortu
     async getAll() {
         try {
@@ -22,6 +22,25 @@ const gelaService = {
         if (!res.ok) throw new Error('Errorea gela eguneratzean');
         return await res.json();
     },
+    
+    // Erregistro bat lortu ID bidez
+    async getById(id) {
+        if (typeof id === 'undefined' || id === null) {
+            throw new Error('getById: ID beharrezkoa da');
+        }
+        try {
+            const url = `${API_URL}?id=${encodeURIComponent(id)}`;
+            const response = await fetch(url, { method: 'GET' });
+            const data = await response.json();
+            if (!response.ok) {
+                throw new Error(data.error || 'Gelak: Errorea gelak lortzean.');
+            }
+            return data;
+        } catch (error) {
+            console.error(`Errorea gela (id=${id}) lortzean:`, error);
+            throw error;
+        }
+    },
 
     // Erregistro berria sortu
     async create(izena, taldea) {
@@ -32,7 +51,7 @@ const gelaService = {
                 body: JSON.stringify({ izena, taldea })
             });
             const data = await response.json();
-            if (!response.ok) throw new Error(data.error || 'Errorea gela sortzean.');
+            if (!response.ok) throw new Error(data.error || 'Gelak: Errorea erregistroa sortzean.');
             return data;
         } catch (error) {
             console.error('Errorea gela sortzean:', error);
@@ -49,7 +68,7 @@ const gelaService = {
                 body: JSON.stringify({ id })
             });
             const data = await response.json();
-            if (!response.ok) throw new Error(data.error || 'Gela: Errorea erregistroa ezabatzean.');
+            if (!response.ok) throw new Error(data.error || 'Gelak: Errorea erregistroa ezabatzean.');
             return data;
         } catch (error) {
             console.error('Errorea gela ezabatzean:', error);
@@ -58,4 +77,4 @@ const gelaService = {
     }
 };
 
-export default gelaService;
+export default gelakService;

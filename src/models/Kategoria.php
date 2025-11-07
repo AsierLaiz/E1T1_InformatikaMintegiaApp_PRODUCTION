@@ -6,7 +6,7 @@ class Kategoria {
     private $db;
 
     public function __construct($db){ $this->db = $db; }
-
+    // Get all kategoriak
     public function getAll() {
         $emaitza = $this->db->getKonexioa()->query("SELECT * FROM kategoria");
         if(!$emaitza) die("ERROREA: Ezin izan dira kategoriak eskuratu.");
@@ -14,7 +14,7 @@ class Kategoria {
         while($row = $emaitza->fetch_assoc()) $datuak[] = $row;
         return $datuak;
     }
-
+    // Get id-aren arabera
     public function get($id){
         $stmt = $this->db->getKonexioa()->prepare("SELECT * FROM kategoria WHERE id = ?");
         $stmt->bind_param("i",$id);
@@ -23,7 +23,7 @@ class Kategoria {
         $stmt->close();
         return $emaitza->num_rows ? $emaitza->fetch_assoc() : null;
     }
-
+    // Kategoria berria sortzen du
     public function create($izena){
         $stmt = $this->db->getKonexioa()->prepare(
             "INSERT INTO kategoria (izena) VALUES (?)"
@@ -33,7 +33,7 @@ class Kategoria {
         $stmt->close();
         return $emaitza;
     }
-
+    // Kategoriak ezabatzen ditu
     public function delete($id){
         $stmt = $this->db->getKonexioa()->prepare("DELETE FROM kategoria WHERE id = ?");
         $stmt->bind_param("i",$id);
