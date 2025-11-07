@@ -90,6 +90,23 @@ const kokalekuakService = {
         }
     },
 
+    // Erregistroa eguneratu
+    async update(etiketa, idGela, hasieraData, amaieraData) {
+        try {
+            const response = await fetch(API_URL, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ etiketa, idGela, hasieraData, amaieraData })
+            });
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || 'Kokalekuak: Errorea erregistroa eguneratzean.');
+            return data;
+        } catch (error) {
+            console.error('Errorea kokalekua eguneratzean:', error);
+            throw error;
+        }
+    },
+
     // Erregistroa ezabatu
     async delete(etiketa, hasieraData) {
         try {

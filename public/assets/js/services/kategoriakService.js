@@ -33,35 +33,52 @@ const kategoriakService = {
     },
 
     // Erregistro berria sortu
-    async create(etiketa, idGela, hasieraData, amaieraData) {
+    async create(izena) {
         try {
             const response = await fetch(API_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ etiketa, idGela, hasieraData, amaieraData })
+                body: JSON.stringify({ izena })
             });
             const data = await response.json();
-            if (!response.ok) throw new Error(data.error || 'Kokalekuak: Errorea erregistroa sortzean.');
+            if (!response.ok) throw new Error(data.error || 'Kategoriak: Errorea erregistroa sortzean.');
             return data;
         } catch (error) {
-            console.error('Errorea kokalekua sortzean:', error);
+            console.error('Errorea kategoria sortzean:', error);
+            throw error;
+        }   
+    },
+
+    // Erregistroa eguneratu
+    async update(id, izena) {
+        try {
+            const response = await fetch(API_URL, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id, izena })
+            });
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || 'Kategoriak: Errorea erregistroa eguneratzean.');
+            return data;
+        } catch (error) {
+            console.error('Errorea kategoria eguneratzean:', error);
             throw error;
         }
     },
 
     // Erregistroa ezabatu
-    async delete(etiketa, hasieraData) {
+    async delete(id) {
         try {
             const response = await fetch(API_URL, {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ etiketa, hasieraData })
+                body: JSON.stringify({ id })
             });
             const data = await response.json();
-            if (!response.ok) throw new Error(data.error || 'Kokalekuak: Errorea erregistroa ezabatzean.');
+            if (!response.ok) throw new Error(data.error || 'Kategoriak: Errorea erregistroa ezabatzean.');
             return data;
         } catch (error) {
-            console.error('Errorea kokalekua ezabatzean:', error);
+            console.error('Errorea kategoria ezabatzean:', error);
             throw error;
         }
     }

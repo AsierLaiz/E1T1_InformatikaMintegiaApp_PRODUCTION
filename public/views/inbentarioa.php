@@ -17,8 +17,8 @@ $CURRENT_USER = require_auth_view('login');
           <thead>
             <tr>
               <th scope="col">Etiketa</th>
-              <th scope="col">idEkipamendu</th>
-              <th scope="col">erosketaData</th>
+              <th scope="col">Ekipoa</th>
+              <th scope="col">Erosketa data</th>
               <th scope="col" colspan="3"></th>
             </tr>
           </thead>

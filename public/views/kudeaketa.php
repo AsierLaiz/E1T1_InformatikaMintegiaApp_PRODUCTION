@@ -44,9 +44,9 @@ $CURRENT_USER = require_auth_view('login');
                   <table class=" table  table-hover" id="tabla-gelak">
                     <thead>
                       <tr>
-                        <th scope="col">id</th>
-                        <th scope="col">izena</th>
-                        <th scope="col">taldea</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Izena</th>
+                        <th scope="col">Taldea</th>
                         <th scope="col" colspan="2"></th>
                       </tr>
                     </thead>
@@ -61,9 +61,9 @@ $CURRENT_USER = require_auth_view('login');
                     <thead>
                       <tr>
                         <th scope="col">Etiketa</th>
-                        <th scope="col">id gela</th>
-                        <th scope="col">hasiera data</th>
-                        <th scope="col">amaiera data</th>
+                        <th scope="col">Gela</th>
+                        <th scope="col">Hasiera data</th>
+                        <th scope="col">Amaiera data</th>
                         <th scope="col" colspan="2"></th>
 
                       </tr>
@@ -78,8 +78,8 @@ $CURRENT_USER = require_auth_view('login');
                   <table class=" table  table-hover" id="tabla-kategoriak">
                     <thead>
                       <tr>
-                        <th scope="col">id</th>
-                        <th scope="col">izena</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Izena</th>
                         <th scope="col" colspan="2"></th>
                         
                       </tr>
