@@ -12,16 +12,6 @@ const gelakService = {
             return [];
         }
     },
-
-    async update(id, data) {
-        const res = await fetch(`${API_URL}?id=${id}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        });
-        if (!res.ok) throw new Error('Errorea gela eguneratzean');
-        return await res.json();
-    },
     
     // Erregistro bat lortu ID bidez
     async getById(id) {
@@ -55,6 +45,23 @@ const gelakService = {
             return data;
         } catch (error) {
             console.error('Errorea gela sortzean:', error);
+            throw error;
+        }
+    },
+
+    // Erregistroa eguneratu
+    async update(id, izena, taldea) {
+        try {
+            const response = await fetch(API_URL, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id, izena, taldea })
+            });
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || 'Gelak: Errorea erregistroa eguneratzean.');
+            return data;
+        } catch (error) {
+            console.error('Errorea gela eguneratzean:', error);
             throw error;
         }
     },

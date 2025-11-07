@@ -291,7 +291,7 @@ async function gordeGela() {
     return;
   }
 
-  await gelakService.update(id, { izena, taldea });
+  await gelakService.update(id, izena, taldea);
 }
 
 async function gordeKokalekua() {
