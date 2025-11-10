@@ -174,7 +174,7 @@ function editatuGela(gela) {
 //Modal Kategoria
 function editatuKategoria(kategoria) {
   const modalElement = document.getElementById('kudeaketaModal');
-  modalElement.dataset.mota = 'gela';
+  modalElement.dataset.mota = 'kategoria';
   const modal = new bootstrap.Modal(modalElement);
 
   const modalTitle = document.querySelector('#inbentarioaModalLabel');
@@ -189,19 +189,11 @@ function editatuKategoria(kategoria) {
       </div>
       <div class="mb-3">
         <label class="form-label"><strong>izena</strong></label>
-        <select id="select2" class="form-select"></select>
+        <input type="text" class="form-control" id="izenaKategoriaInput" value="${kategoria.izena}" required>
       </div>
     </form>
   `;
-  const select = modalBody.querySelector('#select2');
-
-  kategoriak.forEach(k => {
-    const option = document.createElement('option');
-    option.value = k.id;
-    option.textContent = k.izena;
-    select.appendChild(option);
-  });
-
+  
   modal.show();
 }
 
@@ -315,7 +307,7 @@ async function gordeKokalekua() {
 
 async function gordeKategoria() {
   const id = document.querySelector('#idKategoriaInput').value;
-  const izena = document.querySelector('#select2').value;
+  const izena = document.querySelector('#izenaKategoriaInput').value;
 
   if (!izena) {
     alert('Izena falta da');
