@@ -33,3 +33,27 @@ th{
     background-color: #083b68 !important;
     color: white !important;
 }
+
+
+/* modal editatzeko ekipoa */
+#ekipoModal .modal-dialog {
+  margin-top: 100px; 
+}
+
+
+@media (max-width: 768px) {
+  #ekipoModal .modal-dialog {
+    margin: 30px 1rem 40px 1rem !important;
+  }
+
+  #ekipoModal .modal-content {
+    max-height: calc(100vh - 160px); 
+    display: flex;
+    flex-direction: column;
+  }
+
+  #ekipoModal .modal-body {
+    overflow-y: auto;
+    max-height: calc(100vh - 230px); 
+  }
+}

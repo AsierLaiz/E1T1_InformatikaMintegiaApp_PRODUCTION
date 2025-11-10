@@ -92,9 +92,9 @@ $CURRENT_USER = require_auth_view('login');
 </div>
 
 <!-- Editatzeko modal -->
-<div class="modal fade" id="ekipoModal" data-mota="" tabindex="-1" aria-labelledby="inbentarioaModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
+<div class="modal fade" style="margin-top: 50px" id="ekipoModal" data-mota="" tabindex="-1" aria-labelledby="inbentarioaModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content ">
       <div class="modal-header d-flex justify-content-between">
         <h5 class="modal-title" id="inbentarioaModalLabel"></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
