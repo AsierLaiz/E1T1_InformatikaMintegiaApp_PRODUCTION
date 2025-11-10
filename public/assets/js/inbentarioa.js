@@ -47,7 +47,9 @@ function renderizarTabla(produktuak) {
                 </div>
             </td>
     `;
-    tr.querySelector('.btnIkusi').addEventListener('click', () => ikusi(p));
+        tr.querySelector('.btnIkusi').addEventListener('click', () => ikusi(p));
+        tr.querySelector('.btnEditatu').addEventListener('click', () => editatuInbentarioa(p));
+        tr.querySelector('.btnEzabatu').addEventListener('click', () => confirmEzabatuModal(p));
         tbody.appendChild(tr);
     });
 }
@@ -63,3 +65,93 @@ function ikusi(produktua) {
   const modal = new bootstrap.Modal(document.getElementById('inbentarioaModal'));
   modal.show();
 }
+
+//Modal Inbentarioa
+function editatuInbentarioa(produktuak) {
+  const modalElement = document.getElementById('inbentarioaEditatuModal');
+  const modal = new bootstrap.Modal(modalElement);
+
+  const modalTitle = document.querySelector('#inbentarioaEditatuModalLabel');
+  modalTitle.textContent = 'Inbentarioa editatu';
+
+  const modalBody = document.querySelector('#inbentarioaEditatuModal .modal-body');
+  modalBody.innerHTML = `
+    <form id="formEditInbentarioa" class="needs-validation" novalidate>
+        <div class="mb-3">
+            <label class="form-label"><strong>Etiketa:</strong></label>
+            <input disabled type="text" class="form-control" id="etiketaInbentarioInput" value="${produktuak.etiketa}">
+        </div>
+        <div class="mb-3">
+            <label class="form-label"><strong>Ekipamendu Id:</strong></label>
+            <input type="number" class="form-control" id="idEkipamenduInbentarioInput" value="${produktuak.idEkipamendu}">
+        </div>
+        <div class="mb-3">
+            <label class="form-label"><strong>Erosketa data:</strong></label>
+            <input type="date" class="form-control" id="erosketaDataInbentarioInput" value="${produktuak.erosketaData}">
+        </div>
+    </form>
+  `;
+
+  modal.show();
+}
+
+//Modal ezabatzeko konfirmazioa
+function confirmEzabatuModal(item) {
+  const modalTitle = document.querySelector('#ezabatuModalLabel');
+
+    modalTitle.textContent = `${item.etiketa} produktua ezabatuko duzu`;
+
+  const modal = new bootstrap.Modal(document.getElementById('ezabatuModal'));
+  modal.show();
+
+  const confirmBtn = document.querySelector('#confirmEzabatuBtn');
+  confirmBtn.onclick = async () => {
+    try {
+      if (item.etiketa) {
+        await inbentarioaService.delete(item.etiketa);
+      }
+
+      modal.hide();
+      location.reload();
+
+    } catch (errorea) {
+      console.error('Errorea elementua ezabatzean:', errorea);
+    }
+  };
+}
+
+async function gordeDatuak(){
+      try {
+        await gordeInbentarioa();
+        
+        const modal = bootstrap.Modal.getInstance(document.getElementById('inbentarioaEditatuModal'));
+        modal.hide();
+        location.reload();
+    } catch (errorea) {
+        console.error('Errorea datuak gordetzean:', errorea);
+        alert('Errorea datuak gordetzean');
+    }
+}
+
+//Service-ra deitzen da eta bidali baino lehen balidazioak
+async function gordeInbentarioa() {
+    const etiketa = document.querySelector('#etiketaInbentarioInput').value.trim();
+    const idEkipamendu = document.querySelector('#idEkipamenduInbentarioInput').value;
+    const erosketaData = document.querySelector('#erosketaDataInbentarioInput').value.trim();
+
+    if (!idEkipamendu) {
+        alert('Ekipamendu Id-a falta da');
+        return;
+    }
+    if (idEkipamendu <= 0) {
+        alert('Ez da Ekipamendu id bat bat.');
+        return;
+    }if (!erosketaData) {
+        alert('Erosketa data falta da');
+        return;
+    }
+
+    await inbentarioaService.update(etiketa, idEkipamendu, erosketaData);
+}
+
+document.querySelector('#btnGorde').addEventListener('click', gordeDatuak);
