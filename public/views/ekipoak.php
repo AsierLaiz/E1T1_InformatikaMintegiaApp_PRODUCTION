@@ -40,12 +40,12 @@ $CURRENT_USER = require_auth_view('login');
 <script type="module" src="../assets/js/ekipoak.js"></script>
 <?php require_once "partials/footer.php" ?>
 
-
+<!-- ikusi modal -->
 <div class="modal fade" id="ekipoakModal" tabindex="-1" aria-labelledby="ekipoakModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header d-flex justify-content-between">
-        <h5 class="modal-title" id="ekipoakModalLabel"><i class="fa-solid fa-truck-ramp-box me-2"></i> Produktu Inbentariatua</h5>
+        <h5 class="modal-title" id="ekipoakModalLabel"></i> Ekipoa</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
@@ -56,6 +56,7 @@ $CURRENT_USER = require_auth_view('login');
   </div>
 </div>
 
+<!-- gehitu ekipo modal -->
 <div class="modal fade" id="ekipoakGehituModal" tabindex="-1" aria-labelledby="ekipoakGehituModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">

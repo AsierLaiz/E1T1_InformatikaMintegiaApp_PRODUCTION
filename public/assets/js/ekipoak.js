@@ -10,19 +10,19 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 document.querySelector('#sumarEkipo').addEventListener('click', () => ikusiGehitu());
 
-    document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     const inputBusqueda = document.querySelector('.bilatuInput');
     const tabla = document.getElementById('tabla-ekipoak');
 
-    const filasTabla = tabla.querySelector('tbody').rows; 
+    const filasTabla = tabla.querySelector('tbody').rows;
     const indicesBusqueda = [1, 3, 4];
 
-    inputBusqueda.addEventListener('keyup', function() {
+    inputBusqueda.addEventListener('keyup', function () {
         const filtro = inputBusqueda.value.toLowerCase().trim();
 
         for (let i = 0; i < filasTabla.length; i++) {
             const fila = filasTabla[i];
-            let encontrado = false; 
+            let encontrado = false;
 
             for (let j = 0; j < indicesBusqueda.length; j++) {
                 const indice = indicesBusqueda[j];
@@ -33,13 +33,13 @@ document.querySelector('#sumarEkipo').addEventListener('click', () => ikusiGehit
 
                     if (textoCelda.includes(filtro)) {
                         encontrado = true;
-                        break; 
+                        break;
                     }
                 }
             }
 
             if (encontrado) {
-                fila.style.display = ''; 
+                fila.style.display = '';
             } else {
                 fila.style.display = 'none';
             }
@@ -71,6 +71,7 @@ function renderizarTabla(ekipoak) {
     `;
         tr.querySelector('.btnIkusi').addEventListener('click', () => ikusi(e));
         tr.querySelector('.btnEditatu').addEventListener('click', () => editatu(e));
+        tr.querySelector('.btnEzabatu').addEventListener('click', () => confirmEzabatuModal(e));
         tbody.appendChild(tr);
     });
 }
@@ -78,14 +79,14 @@ function renderizarTabla(ekipoak) {
 
 //Modal Editatu
 function editatu(ekipoa) {
-  const modalElement = document.getElementById('ekipoModal');
-  const modal = new bootstrap.Modal(modalElement);
+    const modalElement = document.getElementById('ekipoModal');
+    const modal = new bootstrap.Modal(modalElement);
 
-  const modalTitle = document.querySelector('#inbentarioaModalLabel');
-  modalTitle.textContent = 'Ekipoa editatu';
+    const modalTitle = document.querySelector('#inbentarioaModalLabel');
+    modalTitle.textContent = 'Ekipoa editatu';
 
-  const modalBody = document.querySelector('#ekipoModal .modal-body');
-  modalBody.innerHTML = `
+    const modalBody = document.querySelector('#ekipoModal .modal-body');
+    modalBody.innerHTML = `
     <form id="formEditKokaleku" class="needs-validation" novalidate>
       <div class="mb-3">
         <label class="form-label"><strong>ID</strong></label>
@@ -118,16 +119,16 @@ function editatu(ekipoa) {
     </form>
   `;
 
-  const select = modalBody.querySelector('#kategoriaInput');
-  kategoriak.forEach(g => {
-    const option = document.createElement('option');
-    option.value = g.id;
-    option.textContent = g.izena;
-    if (g.id === ekipoa.idKategoria) option.selected = true;
-    select.appendChild(option);
-  });
-  
-  modal.show();
+    const select = modalBody.querySelector('#kategoriaInput');
+    kategoriak.forEach(g => {
+        const option = document.createElement('option');
+        option.value = g.id;
+        option.textContent = g.izena;
+        if (g.id === ekipoa.idKategoria) option.selected = true;
+        select.appendChild(option);
+    });
+
+    modal.show();
 }
 
 
@@ -158,72 +159,64 @@ function ikusiGehitu() {
 
 //Modal ezabatzeko konfirmazioa
 function confirmEzabatuModal(item) {
-  const modalTitle = document.querySelector('#ezabatuModalLabel');
-  if (item.etiketa) {
-    modalTitle.textContent = `${item.izena} kokalekua ezabatuko duzu`;
-  } else if (item.taldea) {
-    modalTitle.textContent = `${item.izena} gela ezabatuko duzu`;
-  } else {
-    modalTitle.textContent = `${item.izena} kategoria ezabatuko duzu`;
-  }
+    const modalTitle = document.querySelector('#ezabatuModalLabel');
 
-  const modal = new bootstrap.Modal(document.getElementById('ezabatuModal'));
-  modal.show();
+    modalTitle.textContent = `${item.izena} Ekipoa ezabatuko duzu`;
 
-  const confirmBtn = document.querySelector('#confirmEzabatuBtn');
-  confirmBtn.onclick = async () => {
-    try {
-      if (item.etiketa) {
-        await kokalekuakService.delete(item.id);
-      } else if (item.taldea) {
-        await gelakService.delete(item.id);
-      } else {
-        await kategoriakService.delete(item.id);
-      }
 
-      modal.hide();
-      location.reload();
+    const modal = new bootstrap.Modal(document.getElementById('ezabatuModal'));
+    modal.show();
 
-    } catch (errorea) {
-      console.error('Errorea elementua ezabatzean:', errorea);
-    }
-  };
+    const confirmBtn = document.querySelector('#confirmEzabatuBtn');
+    confirmBtn.onclick = async () => {
+        try {
+
+            await ekipoakService.delete(item.id);
+
+
+            modal.hide();
+            location.reload();
+
+        } catch (errorea) {
+            console.error('Errorea elementua ezabatzean:', errorea);
+        }
+    };
 }
 
 //Gordetzeko datuak
 async function gordeDatuak() {
-  const modalElement = document.getElementById('ekipoaModal');
-  const form = modalElement.querySelector('form');
+    const modalElement = document.getElementById('ekipoModal');
+    const form = modalElement.querySelector('form');
 
-  if (!form.checkValidity()) {
-    form.classList.add('was-validated');
-    return;
-  }
+    if (!form.checkValidity()) {
+        form.classList.add('was-validated');
+        return;
+    }
 
-  try {
+    try {
 
-    const id = document.querySelector('#idInput').value;
-    const izena = document.querySelector('#izenaInput').value;
-    const deskribapena = document.querySelector('#deskribapenaInput').value;
-    const marka = document.querySelector('#markaInput').value;
-    const modeloa = document.querySelector('#modeloInput').value;
-    const stock = document.querySelector('#stockInput').value;
-    const kategoria = document.querySelector('#kategoriaInput').value;
+        const id = document.querySelector('#idInput').value;
+        const izena = document.querySelector('#izenaInput').value;
+        const deskribapena = document.querySelector('#deskribapenaInput').value;
+        const marka = document.querySelector('#markaInput').value;
+        const modeloa = document.querySelector('#modeloInput').value;
+        const stock = document.querySelector('#stockInput').value;
+        const kategoria = document.querySelector('#kategoriaInput').value;
 
-  if (!izena) {
-    alert('Izena falta da');
-    return;
-  }
+        if (!izena) {
+            alert('Izena falta da');
+            return;
+        }
 
-  await kategoriakService.update(id, izena, deskribapena, marka, modeloa, stock, kategoria );
+        await ekipoakService.update(id, izena, deskribapena, marka, modeloa, stock, kategoria);
 
-    const modal = bootstrap.Modal.getInstance(document.getElementById('kudeaketaModal'));
-    modal.hide();
-    location.reload();
-  } catch (errorea) {
-    console.error('Errorea datuak gordetzean:', errorea);
-    alert('Errorea datuak gordetzean');
-  }
+        const modal = bootstrap.Modal.getInstance(document.getElementById('ekipoModal'));
+        modal.hide();
+        location.reload();
+    } catch (errorea) {
+        console.error('Errorea datuak gordetzean:', errorea);
+        alert('Errorea datuak gordetzean');
+    }
 }
 
 document.querySelector('#btnGorde').addEventListener('click', gordeDatuak);

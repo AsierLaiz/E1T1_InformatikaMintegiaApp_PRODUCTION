@@ -49,6 +49,22 @@ const ekipoakService = {
         }
     },
 
+    async update(id, izena, deskribapena, marka, modelo, stock, idKategoria) {
+        try {
+            const response = await fetch(API_URL, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id, izena, deskribapena, marka, modelo, stock, idKategoria })
+            });
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || 'Ekipamendua: Errorea eguneratzean.');
+            return data;
+        } catch (error) {
+            console.error('Errorea ekipoa eguneratzean:', error);
+            throw error;
+        }
+    },
+
     // Erregistroa ezabatu
     async delete(id) {
         try {
