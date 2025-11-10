@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Datu-basea: `3wag2e1`
+-- Datu-basea: `informintegia`
 --
 
 -- --------------------------------------------------------
@@ -35,7 +35,9 @@ CREATE TABLE `ekipamendua` (
   `marka` varchar(20) DEFAULT NULL,
   `modelo` varchar(100) DEFAULT NULL,
   `stock` int NOT NULL,
-  `idKategoria` int NOT NULL
+  `idKategoria` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_kategoria` (`idKategoria`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -50,7 +52,8 @@ CREATE TABLE `erabiltzailea` (
   `abizena` varchar(50) NOT NULL,
   `erabiltzailea` varchar(20) NOT NULL,
   `pasahitza` varchar(20) NOT NULL,
-  `rola` char(1) NOT NULL
+  `rola` char(1) NOT NULL,
+  PRIMARY KEY (`nan`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -62,7 +65,8 @@ CREATE TABLE `erabiltzailea` (
 CREATE TABLE `gela` (
   `id` int NOT NULL AUTO_INCREMENT,
   `izena` varchar(4) NOT NULL,
-  `taldea` varchar(5) DEFAULT NULL
+  `taldea` varchar(5) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -74,7 +78,9 @@ CREATE TABLE `gela` (
 CREATE TABLE `inbentarioa` (
   `etiketa` varchar(10) NOT NULL,
   `idEkipamendu` int NOT NULL,
-  `erosketaData` date NOT NULL
+  `erosketaData` date NOT NULL,
+  PRIMARY KEY (`etiketa`),
+  KEY `fk_ekipamendua` (`idEkipamendu`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -85,7 +91,8 @@ CREATE TABLE `inbentarioa` (
 
 CREATE TABLE `kategoria` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `izena` varchar(20) NOT NULL
+  `izena` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -98,7 +105,9 @@ CREATE TABLE `kokalekua` (
   `etiketa` varchar(10) NOT NULL,
   `idGela` int NOT NULL,
   `hasieraData` date NOT NULL,
-  `amaieraData` date DEFAULT NULL
+  `amaieraData` date DEFAULT NULL,
+  PRIMARY KEY (`etiketa`,`hasieraData`),
+  KEY `fk_gela` (`idGela`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -122,59 +131,38 @@ CREATE TABLE `remember_tokens` (
 -- `ekipamendua` taularen indizeak
 --
 ALTER TABLE `ekipamendua`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_kategoria` (`idKategoria`);
+  ADD CONSTRAINT `fk_kategoria`
+  FOREIGN KEY (`idKategoria`)
+  REFERENCES `kategoria` (`id`)
+  ON DELETE SET NULL
+  ON UPDATE CASCADE;
 
 --
--- `erabiltzailea` taularen indizeak
+-- `erabiltzailea`
 --
-ALTER TABLE `erabiltzailea`
-  ADD PRIMARY KEY (`nan`);
+-- Jadanik jarrita
 
 --
--- `gela` taularen indizeak
+-- `gela`
 --
-ALTER TABLE `gela`
-  ADD PRIMARY KEY (`id`);
+-- Jadanik jarrita
 
 --
--- `inbentarioa` taularen indizeak
+-- `inbentarioa`
 --
 ALTER TABLE `inbentarioa`
-  ADD PRIMARY KEY (`etiketa`),
-  ADD KEY `fk_ekipamendua` (`idEkipamendu`);
+  ADD CONSTRAINT `fk_ekipamendua`
+  FOREIGN KEY (`idEkipamendu`)
+  REFERENCES `ekipamendua` (`id`)
+  ON DELETE CASCADE;
 
 --
--- `kategoria` taularen indizeak
+-- `kategoria`
 --
-ALTER TABLE `kategoria`
-  ADD PRIMARY KEY (`id`);
+-- Jadanik jarrita
 
 --
--- `kokalekua` taularen indizeak
---
-ALTER TABLE `kokalekua`
-  ADD PRIMARY KEY (`etiketa`,`hasieraData`),
-  ADD KEY `fk_gela` (`idGela`);
-
---
--- Dumpatutako taulen murriztapenak
---
-
---
--- `ekipamendua` taularen kanpo-gakoak
---
-ALTER TABLE `ekipamendua`
-  ADD CONSTRAINT `fk_kategoria` FOREIGN KEY (`idKategoria`) REFERENCES `kategoria` (`ID`);
-
---
--- `inbentarioa` taularen kanpo-gakoak
---
-ALTER TABLE `inbentarioa`
-  ADD CONSTRAINT `fk_ekipamendua` FOREIGN KEY (`idEkipamendu`) REFERENCES `ekipamendua` (`id`);
-
---
--- `kokalekua` taularen kanpo-gakoak
+-- `kokalekua`
 --
 ALTER TABLE `kokalekua`
   ADD CONSTRAINT `fk_gela` FOREIGN KEY (`idGela`) REFERENCES `gela` (`id`) ON DELETE CASCADE,
@@ -183,4 +171,4 @@ COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;  
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
