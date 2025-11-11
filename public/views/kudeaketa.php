@@ -5,18 +5,7 @@ $CURRENT_USER = require_auth_view('login');
 <?php require_once "partials/header.php" ?>
 
 <style>
-.table-scroll-container {
-    max-height: 60vh;
-    overflow-y: auto;
-    overflow-x: auto;
-}
 
-.table-scroll-container .table thead th {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    background-color: white;
-}
 </style>
 
 <div class="container-fluid text-white d-block align-items-center justify-content-center p-3 p-md-5 container-home">
@@ -29,13 +18,13 @@ $CURRENT_USER = require_auth_view('login');
           <div class="card-erosketacard shadow-xl rounded-3 border-0">
             <div class="card-body p-0">
               <ul class="nav nav-tabs erosketak flex-column flex-md-row tab-list-custom" id="myTab">
-
                 <li class="btn-superior-erosketak flex-md-fill">
-                  <button class="nav-link active rounded-top-3 px-4" id="tab-opcion1" data-bs-toggle="tab"
-                    data-bs-target="#content-opcion1">
+                  <button class="nav-link active rounded-top-3 px-4" id="tab-opcion1" 
+                  data-bs-toggle="tab" data-bs-target="#content-opcion1">
                     Gelak
                   </button>
                 </li>
+
 
                 <li class="flex-md-fill">
                   <button class="nav-link rounded-top-3 px-4" id="tab-opcion2" data-bs-toggle="tab"
