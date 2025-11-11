@@ -4,8 +4,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderizarTabla(erabiltzaileak);
 });
 
-document.querySelector('#sumarErabiltzaile').addEventListener('click', () => ikusiGehituErab());
-
 document.querySelector('.bilatuInput').addEventListener('keyup', function () {
     let input, filter, table, tr, tdNAN, tdIzena, tdErabiltzailea, i, txtValue;
     input = document.querySelector('.bilatuInput');
@@ -88,16 +86,16 @@ function ikusi(erabiltzailea) {
 
 //Modal Inbentarioa
 function gehituErabiltzailea() {
-  const modalElement = document.getElementById('erabiltzaileakGehituModal');
-  const modal = new bootstrap.Modal(modalElement);
+    const modalElement = document.getElementById('erabiltzaileakGehitzekoModal');
+    const modal = new bootstrap.Modal(modalElement);
 
-  const modalTitle = document.querySelector('#erabiltzaileakGehituModalLabel');
-  modalTitle.textContent = 'Erabiltzailea editatu';
+    const modalTitle = document.querySelector('#erabiltzaileakGehitzekoModalLabel');
+    modalTitle.textContent = 'Erabiltzailea editatu';
 
-  const modalBody = document.querySelector('#erabiltzaileakGehituModal .modal-body');
+    const modalBody = document.querySelector('#erabiltzaileakGehitzekoModal .modal-body');
 
-modalBody.innerHTML = `
-    <form id="formGehituErabiltzaileak" class="needs-validation" novalidate>
+    modalBody.innerHTML = `
+    <form id="formGehitzekoErabiltzaileak" class="needs-validation" novalidate>
         <div class="mb-3">
             <label class="form-label"><strong>NAN:</strong></label>
             <input type="text" class="form-control" id="nanErabiltzaileakInput">
@@ -115,6 +113,14 @@ modalBody.innerHTML = `
             <input type="text" class="form-control" id="erabiltzaileaErabiltzaileakInput">
         </div>
         <div class="mb-3">
+            <label class="form-label"><strong>Pasahitza:</strong></label>
+            <input type="password" class="form-control" id="pasahitzaBatErabiltzaileakInput">
+        </div>
+        <div class="mb-3">
+            <label class="form-label"><strong>Pasahitza Errepikatu:</strong></label>
+            <input type="password" class="form-control" id="pasahitzaBiErabiltzaileakInput">
+        </div>
+        <div class="mb-3">
             <label class="form-label"><strong>Rola:</strong></label>
             <select id="selectRola" class="form-select">
                 <option value="A">Admin</option>
@@ -124,20 +130,20 @@ modalBody.innerHTML = `
     </form>
 `;
 
-  modal.show();
+    modal.show();
 }
 
 //Modal Erabiltzailea Editatu
 function editatuErabiltzailea(erabiltzailea) {
-  const modalElement = document.getElementById('erabiltzaileakEditatuModal');
-  const modal = new bootstrap.Modal(modalElement);
+    const modalElement = document.getElementById('erabiltzaileakEditatuModal');
+    const modal = new bootstrap.Modal(modalElement);
 
-  const modalTitle = document.querySelector('#erabiltzaileakEditatuModalLabel');
-  modalTitle.textContent = 'Erabiltzailea editatu';
+    const modalTitle = document.querySelector('#erabiltzaileakEditatuModalLabel');
+    modalTitle.textContent = 'Erabiltzailea editatu';
 
-  const modalBody = document.querySelector('#erabiltzaileakEditatuModal .modal-body');
+    const modalBody = document.querySelector('#erabiltzaileakEditatuModal .modal-body');
 
-modalBody.innerHTML = `
+    modalBody.innerHTML = `
     <form id="formEditErabiltzaileak" class="needs-validation" novalidate>
         <div class="mb-3">
             <label class="form-label"><strong>NAN:</strong></label>
@@ -165,59 +171,44 @@ modalBody.innerHTML = `
     </form>
 `;
 
-  modal.show();
+    modal.show();
 }
 
 //Modal ezabatzeko konfirmazioa
 function confirmEzabatuModal(item) {
-  const modalTitle = document.querySelector('#ezabatuModalLabel');
+    const modalTitle = document.querySelector('#ezabatuModalLabel');
 
     modalTitle.textContent = `${item.etiketa} produktua ezabatuko duzu`;
 
-  const modal = new bootstrap.Modal(document.getElementById('ezabatuModal'));
-  modal.show();
+    const modal = new bootstrap.Modal(document.getElementById('ezabatuModal'));
+    modal.show();
 
-  const confirmBtn = document.querySelector('#confirmEzabatuBtn');
-  confirmBtn.onclick = async () => {
-    try {
-      if (item.etiketa) {
-        await inbentarioaService.delete(item.etiketa);
-      }
+    const confirmBtn = document.querySelector('#confirmEzabatuBtn');
+    confirmBtn.onclick = async () => {
+        try {
+            if (item.etiketa) {
+                await inbentarioaService.delete(item.etiketa);
+            }
 
-      modal.hide();
-      location.reload();
+            modal.hide();
+            location.reload();
 
-    } catch (errorea) {
-      console.error('Errorea elementua ezabatzean:', errorea);
-    }
-  };
+        } catch (errorea) {
+            console.error('Errorea elementua ezabatzean:', errorea);
+        }
+    };
 }
 
-async function gordeDatuak(method){
-    if(method == 1){
-        try {
-
-            await updateErabiltzailea();
+async function gordeDatuakUpdate(){
+      try {
+        await updateErabiltzailea();
         
-            const modal = bootstrap.Modal.getInstance(document.getElementById('erabiltzaileakEditatuModal'));
-            modal.hide();
-            location.reload();
-        } catch (errorea) {
-            console.error('Errorea datuak gordetzean:', errorea);
-            alert('Errorea datuak gordetzean');
-        }
-    }else if(method == 2){
-        try {
-
-            await sortuErabiltzailea();
-        
-            const modal = bootstrap.Modal.getInstance(document.getElementById('erabiltzaileakGehituModal'));
-            modal.hide();
-            location.reload();
-        } catch (errorea) {
-            console.error('Errorea datuak gordetzean:', errorea);
-            alert('Errorea datuak gordetzean');
-        }
+        const modal = bootstrap.Modal.getInstance(document.getElementById('erabiltzaileakEditatuModal'));
+        modal.hide();
+        location.reload();
+    } catch (errorea) {
+        console.error('Errorea datuak gordetzean:', errorea);
+        alert('Errorea datuak gordetzean');
     }
 }
 
@@ -245,29 +236,102 @@ async function updateErabiltzailea() {
     await erabiltzaileakService.update(nan, izena, abizena, erabiltzailea, rola);
 }
 
-async function sortuErabiltzailea() {
-    const nan = document.querySelector('#nanErabiltzaileakInput').value.trim();
-    const izena = document.querySelector('#izenaErabiltzaileakInput').value.trim();
-    const abizena = document.querySelector('#abizenaErabiltzaileakInput').value.trim();
-    const erabiltzailea = document.querySelector('#erabiltzaileaErabiltzaileakInput').value.trim();
-    const rola = document.querySelector('#selectRola').value.trim();
+async function gordeDatuakSortu(){
+      try {
+        await sortuErabiltzailea();
+        
+        const modalSortu = bootstrap.Modal.getInstance(document.getElementById('erabiltzaileakGehitzekoModal'));
+        modalSortu.hide();
+        location.reload();
+    } catch (errorea) {
+        console.error('Errorea datuak gordetzean:', errorea);
+        alert('Errorea datuak gordetzean');
+    }
+}
 
-    if (!izena) {
+//Service-ra deitzen da eta bidali baino lehen balidazioak
+async function sortuErabiltzailea() {
+    const nanSortu = document.querySelector('#nanErabiltzaileakInput').value.trim();
+    const izenaSortu = document.querySelector('#izenaErabiltzaileakInput').value.trim();
+    const abizenaSortu = document.querySelector('#abizenaErabiltzaileakInput').value.trim();
+    const erabiltzaileaSortu = document.querySelector('#erabiltzaileaErabiltzaileakInput').value.trim();
+    const pasahitzaBatSortu = document.querySelector('#pasahitzaBatErabiltzaileakInput').value;
+    const pasahitzaBiSortu = document.querySelector('#pasahitzaBiErabiltzaileakInput').value;
+    const rolaSortu = document.querySelector('#selectRola').value.trim();
+
+    console.log(nanSortu, izenaSortu, abizenaSortu, erabiltzaileaSortu, pasahitzaBatSortu, rolaSortu);
+
+    if(!pasahitzaBatSortu){
+        alert('Erabiltzaile pasahitza falta da');
+        return;
+    }
+
+    if(!pasahitzaBiSortu){
+        alert('Erabiltzaile pasahitza errepikatzea falta da');
+        return;
+    }
+
+    if(pasahitzaBatSortu !== pasahitzaBiSortu){
+        alert('Bi pasahitzak ez dira berdinak');
+        return;
+    }
+
+    if (!nanSortu) {
+        alert('Erabiltzaile NAN falta da');
+        return;
+    }
+    // NAN Komprobatzeko egiazkoa den
+    if (!komprobatuNAN(nanSortu)) {
+        alert('Erabiltzaile NAN ez da egokia');
+        return;
+    }
+    if (!izenaSortu) {
         alert('Erabiltzaile izena falta da');
         return;
     }
-    if (!abizena) {
+    if (!abizenaSortu) {
         alert('Erabiltzaile abizena falta da');
         return;
     }
-    if (!erabiltzailea) {
+    if (!erabiltzaileaSortu) {
         alert('Erabiltzaileen erabiltzaile-izena falta da');
         return;
     }
+    if (!rolaSortu) {
+        alert('Erabiltzaileen rola falta da');
+        return;
+    }
 
-    await erabiltzaileakService.update(nan, izena, abizena, erabiltzailea, rola);
+    await erabiltzaileakService.create(nanSortu, izenaSortu, abizenaSortu, erabiltzaileaSortu, pasahitzaBatSortu, rolaSortu);
 }
 
-document.querySelector('#btnGorde').addEventListener('click', gordeDatuak(1));
-document.querySelector('#btnSortu').addEventListener('click', gordeDatuak(2));
+function komprobatuNAN(dni) {
+    const letras = 'TRWAGMYFPDXBNJZSQVHLCKE';
+    
+    // 1. Sarrera garbitu eta estandarizatu (zuriuneak/gidoiak kendu, larri bihurtu)
+    dni = dni.toUpperCase().replace(/[^0-9A-Z]/g, '');
+
+    // 2. Luzera eta oinarrizko formatua konprobatu (9 karaktere)
+    if (dni.length !== 9 || !dni.match(/^[0-9XYZ]?\d{7}[A-Z]$/)) {
+        return false; // Okerra: formatu edo luzera desegokia
+    }
+    
+    // 3. NIE kudeatu (atzerritarrak): X, Y, Z 0, 1, 2 bihurtu kalkulua egiteko
+    dni = dni.replace(/^X/, '0').replace(/^Y/, '1').replace(/^Z/, '2');
+
+    // 4. Zenbakia eta letra bereizi
+    // parseInt erabiliz, zenbakizko zatia lortzen dugu
+    const numero = parseInt(dni.substring(0, 8), 10); 
+    const letra = dni.charAt(8);
+
+    // 5. Kalkulua eta konprobazioa (23ko Modulua)
+    // Zenbakiaren 23rekiko zatiketaren hondarrak letrak duen indizearekin bat etorri behar du
+    const indiceCalculado = numero % 23;
+    const letraCalculada = letras.charAt(indiceCalculado);
+
+    return letraCalculada === letra;
+}
+
+document.querySelector('#btnGorde').addEventListener('click', gordeDatuakUpdate);
+document.querySelector('#btnSortu').addEventListener('click', gordeDatuakSortu);
 document.querySelector('#sumarErabiltzaile').addEventListener('click', gehituErabiltzailea);

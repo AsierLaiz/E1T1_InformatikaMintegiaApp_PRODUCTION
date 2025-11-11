@@ -33,12 +33,12 @@ const erabiltzaileakService = {
     },
 
     // Erregistro berria sortu
-    async create(nan, izena, abizena, erabiltzailea, pasahitza, rol) {
+    async create(nan, izena, abizena, erabiltzailea, pasahitza, rola) {
         try {
             const response = await fetch(API_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ nan, izena, abizena, erabiltzailea, pasahitza, rol })
+                body: JSON.stringify({ nan, izena, abizena, erabiltzailea, pasahitza, rola })
             });
             const data = await response.json();
             if (!response.ok) throw new Error(data.error || 'Erabiltzaileak: Errorea erregistroa sortzean.');
@@ -58,7 +58,7 @@ const erabiltzaileakService = {
                 body: JSON.stringify({ nan, izena, abizena, erabiltzailea, rola })
             });
             const data = await response.json();
-            if (!response.ok) throw new Error(data.error || 'Inbentarioa: Errorea erabiltzailea eguneratzean.');
+            if (!response.ok) throw new Error(data.error || 'Erabiltzaileak: Errorea erabiltzailea eguneratzean.');
             return data;
         } catch (error) {
             console.error('Errorea erabiltzailea eguneratzean:', error);
