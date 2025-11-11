@@ -1,6 +1,6 @@
 import ekipoakService from './services/ekipoakService.js';
 import kategoriakService from './services/kategoriakService.js';
-import inbentarioService from './services/inbentarioaService.js';
+import inbentarioaService from './services/inbentarioaService.js';
 import gelakService from './services/gelakService.js'
 import etiketakService from './services/etiketakService.js'; 
 
@@ -320,6 +320,7 @@ document.querySelector('#btnGorde').addEventListener('click', gordeDatuak);
 
 //Modala etiketatzeko ekipo bat
 async function etiketatu(ekipoa) {
+    const stockErabilgarria = await inbentarioaService.getEtiketatuGabe(ekipoa.id);
     const modalElement = document.getElementById('etiketatuModal'); 
     const modal = new bootstrap.Modal(modalElement);
 
@@ -350,8 +351,8 @@ async function etiketatu(ekipoa) {
         </div>
         <div class="mb-3">
           <label class="form-label fw-bold">Kopurua</label>
-          <small class="text-muted">Stock erabilgarria: ${ekipoa.stock}</small>
-          <input type="number" id="etiketaKopurua" class="form-control" min="1" max="${ekipoa.stock}" value="1" required>
+          <small class="text-muted">Stock erabilgarria: ${stockErabilgarria.etiketatu_gabe}</small>
+          <input type="number" id="etiketaKopurua" class="form-control" min="1" max="${stockErabilgarria.etiketatu_gabe}" value="1" required>
           
         </div>
       </form>

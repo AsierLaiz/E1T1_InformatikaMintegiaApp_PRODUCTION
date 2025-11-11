@@ -31,6 +31,25 @@ const inbentarioaService = {
             throw error;
         }
     },
+    
+    // Etiketatu gabe kopurua lortu
+    async getEtiketatuGabe(idEkipamendu) {
+        if (typeof idEkipamendu === 'undefined' || idEkipamendu === null) {
+            throw new Error('getEtiketatuGabe: idEkipamendu beharrezkoa da');
+        }
+        try {
+            const url = `${API_URL}?idEkipamendu=${encodeURIComponent(idEkipamendu)}`;
+            const response = await fetch(url, { method: 'GET' });
+            const data = await response.json();
+            if (!response.ok) {
+                throw new Error(data.error || 'Inbentarioa: Errorea etiketatu_gabe lortzean.');
+            }
+            return data;
+        } catch (error) {
+            console.error(`Errorea etiketatu_gabe (idEkipamendu=${idEkipamendu}) lortzean:`, error);
+            throw error;
+        }
+    },
 
     // Erregistro berria sortu
     async create(etiketa, idEkipamendu, erosketaData) {
