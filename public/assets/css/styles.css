@@ -3,30 +3,131 @@
     font-family: 'Open Sans';
     font-weight: 400;
     font-style: normal;
-    
+
     src: url('../fonts/OpenSans-Regular.woff2') format('woff2'),
-         url('../fonts/OpenSans-Regular.woff') format('woff');
+        url('../fonts/OpenSans-Regular.woff') format('woff');
 }
+
 /* ----------- */
 
 /* GENERAL */
-html, body {
-    height: 100%; 
+html,
+body {
+    height: 100%;
 }
 
 body {
     font-family: 'Open Sans', sans-serif;
-    padding-top: 100px; 
+    padding-top: 100px;
 }
+
 /* --------- */
+
+/* MODALAK ETA BOTOIAK (GENERALA) */
+.contenedor {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+
+}
+
+th {
+    background-color: #BBD0EA !important;
+}
+
+.btnIkusi {
+    border-color: #2d5980 !important;
+    background-color: #2d5980;
+    color: white;
+}
+
+.btnIkusi:hover,
+.btnIkusi:focus,
+.btnIkusi:focus-visible {
+    border-color: #152838 !important;
+    background-color: #152838 !important;
+    color: white !important;
+}
+
+.btnEditatu {
+    border-color: #4b779e !important;
+    background-color: #4b779e;
+    color: white;
+}
+
+.btnEditatu:hover,
+.btnEditatu:focus,
+.btnEditatu:focus-visible {
+    border-color: #083b68 !important;
+    background-color: #083b68 !important;
+    color: white !important;
+}
+
+.btnEtiketatu {
+    border-color: #389ba3 !important;
+    background-color: #389ba3;
+    color: white;
+}
+
+.btnEtiketatu:hover,
+.btnEtiketatu:focus,
+.btnEtiketatu:focus-visible {
+    border-color: #2c787e !important;
+    background-color: #2c787e !important;
+    color: white !important;
+}
+
+.modal-content {
+    max-height: calc(100vh - 140px);
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-body {
+    overflow-y: auto;
+    max-height: 550px;
+}
+
+.table-scroll-container {
+    max-height: 60vh;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+.table-scroll-container .table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: white;
+}
+
+@media (max-width: 768px) {
+    .modal-dialog {
+        margin: 20px 1rem 40px 1rem !important;
+    }
+
+    .modal-content {
+        max-height: calc(100vh - 160px);
+        display: flex;
+        flex-direction: column;
+    }
+
+    .modal-body {
+        overflow-y: auto;
+        max-height: 350px;
+    }
+}
+
+/* ------------- */
 
 /* INDEX */
 .body-index {
-    background-image: url("../img/background_login.jpg"); 
-    background-size: cover; 
-    background-repeat: no-repeat; 
-    background-attachment: fixed; 
-    background-position: center center; 
+    background-image: url("../img/background_login.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
 }
 
 .container-index {
@@ -34,6 +135,7 @@ body {
     margin-bottom: 20rem;
 
 }
+
 /* ----------- */
 
 /* HEADER */
@@ -47,9 +149,9 @@ body {
 }
 
 header .navbar {
-    background-color: white !important; 
+    background-color: white !important;
     box-shadow: 0px 0px 8px 0px #000000 !important;
-    z-index: 9999 !important; 
+    z-index: 9999 !important;
     transition: 500ms;
 }
 
@@ -59,9 +161,9 @@ header .navbar:focus {
 }
 
 header .index-navbar {
-    background-color: white !important; 
+    background-color: white !important;
     box-shadow: 0px 0px 8px 0px #000000 !important;
-    z-index: 9999 !important; 
+    z-index: 9999 !important;
     transition: 500ms;
 }
 
@@ -83,7 +185,7 @@ header .index-navbar {
     border-radius: 3px;
 }
 
-.nav-item:hover a, 
+.nav-item:hover a,
 .nav-item:focus a {
     color: white;
 }
@@ -91,8 +193,8 @@ header .index-navbar {
 .navbar-toggler {
     border: none;
     padding: 0;
-    width: 40px; 
-    height: 40px; 
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -123,9 +225,11 @@ header .index-navbar {
 .navbar-toggler:not(.collapsed) .line1 {
     transform: translateY(8px) rotate(45deg);
 }
+
 .navbar-toggler:not(.collapsed) .line2 {
     opacity: 0;
 }
+
 .navbar-toggler:not(.collapsed) .line3 {
     transform: translateY(-8px) rotate(-45deg);
 }
@@ -138,7 +242,7 @@ header .index-navbar {
 .nav-item.perfil {
     display: flex;
     align-items: center;
-    margin-left: 2rem; 
+    margin-left: 2rem;
 }
 
 .perfil {
@@ -157,16 +261,16 @@ header .index-navbar {
 .perfil img {
     width: auto;
     height: 50px;
-    display: block; 
+    display: block;
 }
 
 .profile-menu-box {
     position: absolute;
     top: 100%;
-    right: 0; 
+    right: 0;
     width: 220px;
     z-index: 1050;
-    display: none; 
+    display: none;
     margin-top: 10px;
     transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
     transform-origin: top right;
@@ -195,6 +299,7 @@ header .index-navbar {
         display: none;
     }
 }
+
 /* ----------- */
 
 /* FOOTER */
@@ -217,32 +322,33 @@ footer a.text-white-50:hover {
     transition: background-color 0.3s, color 0.3s;
 }
 
-.social-icons a{
+.social-icons a {
     text-decoration: none !important;
 }
 
 .btn-social:hover {
     background-color: white !important;
-    color: #000000 !important; 
+    color: #000000 !important;
 }
+
 /* ----------- */
 
 /* LOGIN */
 .body-login {
-    background-image: url("../img/background_login.jpg"); 
-    background-size: cover; 
-    background-repeat: no-repeat; 
-    background-attachment: fixed; 
-    background-position: center center; 
+    background-image: url("../img/background_login.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
 }
 
 .login-container {
-    max-width: 400px; 
+    max-width: 400px;
     padding: 50px;
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     background-color: #ffffff;
-    width: 90%; 
+    width: 90%;
 }
 
 .form-label {
@@ -263,16 +369,17 @@ footer a.text-white-50:hover {
 @media (max-width: 576px) {
     .login-container {
         width: 95%;
-        padding: 30px; 
-        box-shadow: none; 
+        padding: 30px;
+        box-shadow: none;
     }
-    
+
     .body-login {
         align-items: flex-start;
-        padding-top: 5vh; 
+        padding-top: 5vh;
         padding-bottom: 5vh;
     }
 }
+
 /* ----------- */
 
 
@@ -288,25 +395,26 @@ footer a.text-white-50:hover {
 @media (max-width: 576px) {
     .register-container {
         width: 95%;
-        padding: 20px; 
-        box-shadow: none; 
+        padding: 20px;
+        box-shadow: none;
     }
 }
+
 /* ----------- */
 
 /* HOME */
 .container-home {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../img/background_login.jpg"); 
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../img/background_login.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-size: cover; 
+    background-size: cover;
     background-position: center;
 }
 
 .title-home {
-    letter-spacing: 5px; 
+    letter-spacing: 5px;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
 }
 
@@ -324,18 +432,20 @@ footer a.text-white-50:hover {
 .btnHome:hover {
     background-color: #142738 !important;
 }
+
 /* ------------- */
 
 /* PERFIL */
-.container-carta{
+.container-carta {
     background-color: #f8f9fa;
 }
 
 .nombre-perfil img {
-    width: 120px; 
-    height: 120px; 
+    width: 120px;
+    height: 120px;
     object-fit: cover;
 }
+
 /* ------------- */
 
 /* EROSKETAK */
@@ -366,7 +476,7 @@ footer a.text-white-50:hover {
     color: black;
 }
 
-.erosketak .nav-link:hover > i {
+.erosketak .nav-link:hover>i {
     color: black;
 }
 
@@ -437,7 +547,7 @@ footer a.text-white-50:hover {
     }
 
     .tab-list-custom.flex-md-row .nav-link {
-        width: 100%; 
+        width: 100%;
         text-align: center;
         /* border-radius: 0.5rem 0.5rem 0 0 !important;  */
     }
@@ -446,24 +556,27 @@ footer a.text-white-50:hover {
         border-color: #dee2e6 #dee2e6 #fff;
     }
 }
+
 /* ------------- */
 
 /* INBENTARIOA */
-  #tabla-inbentarioa thead th {
+#tabla-inbentarioa thead th {
     position: sticky;
     top: 0;
-    background-color: white; 
-    z-index: 10;       
-  }
+    background-color: white;
+    z-index: 10;
+}
+
 /* ------------ */
 
 /* EKIPOAK */
-  #tabla-ekipoak thead th {
+#tabla-ekipoak thead th {
     position: sticky;
     top: 0;
-    background-color: white; 
-    z-index: 10;       
-  }
+    background-color: white;
+    z-index: 10;
+}
+
 /* ------------ */
 
 /* BOTONES */
@@ -475,7 +588,7 @@ footer a.text-white-50:hover {
     transition: 300ms;
 }
 
-.btnEzabatu{
+.btnEzabatu {
     background-color: rgb(197, 0, 0) !important;
     border: none;
     transition: 300ms;
@@ -484,6 +597,7 @@ footer a.text-white-50:hover {
 .btnEzabatu:hover {
     background-color: rgb(129, 0, 0) !important;
 }
+
 /* ------------- */
 
 /* BILATU */
@@ -493,12 +607,13 @@ footer a.text-white-50:hover {
 
 .bilatuInput:focus {
     border-color: #BBD0EA;
-    box-shadow: 0 0 0 4px #bbd0ea7c; 
+    box-shadow: 0 0 0 4px #bbd0ea7c;
 }
 
-.input-group-text{
+.input-group-text {
     background-color: #bbd0ea94;
 }
+
 /* ---------- */
 
 /* SUMAR */
@@ -506,11 +621,12 @@ footer a.text-white-50:hover {
     border-radius: 100px;
     padding: 10px 15px;
     transition: 300ms;
-    background-color: #2d5980  !important;
+    background-color: #2d5980 !important;
     color: white !important;
 }
 
-.btnSumar:hover, .btnSumar:focus {
+.btnSumar:hover,
+.btnSumar:focus {
     background-color: #0c1b29 !important;
     color: white !important;
 }
@@ -520,6 +636,7 @@ footer a.text-white-50:hover {
     border-color: #224461 !important;
     color: white !important;
 }
+
 /* ---------- */
 
 /* BOTOIA */
@@ -532,4 +649,5 @@ footer a.text-white-50:hover {
 .btnSaiItx:hover {
     background-color: rgb(187, 32, 32) !important;
 }
+
 /* --------- */

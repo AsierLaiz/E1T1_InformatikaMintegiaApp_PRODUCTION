@@ -10,7 +10,7 @@ $CURRENT_USER = require_admin_view('login', 'home');
     <div class="contenedor my-5">
       <h1 class="mb-3 text-dark">Erabiltzaileak</h1>
       <div class="mb-4 me-3 d-flex justify-content-end">
-        <button class="btn btn-sm btnSumar" id="sumarErabiltzaile" alt="Sortu erabiltzaile berria"><i class="fa-solid fa-plus"></i></button>
+        <button class="btn btn-sm btnSumar" id="sumarErabiltzaile" alt="Sortu erabiltzaile berria"><i class="fa-solid fa-plus"></i> Sortu</button>
       </div>
       <div class="input-group mb-4 bilatu">
         <input type="text" class="form-control bilatuInput" placeholder="NAN, Izena edo Erabiltzaile bidez bilatu ...">
@@ -56,7 +56,7 @@ $CURRENT_USER = require_admin_view('login', 'home');
 </div>
 
 <!-- Gehitzeko modal -->
-<div class="modal fade" id="erabiltzaileakGehitzekoModal" data-mota="" tabindex="-1" aria-labelledby="erabiltzaileakGehitzekoModalLabel" aria-hidden="true">
+<div class="modal fade mt-5" id="erabiltzaileakGehitzekoModal" data-mota="" tabindex="-1" aria-labelledby="erabiltzaileakGehitzekoModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header d-flex justify-content-between">
