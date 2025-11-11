@@ -29,8 +29,6 @@ document.querySelector('.bilatuInput').addEventListener('keyup', function () {
     }
 });
 
-
-
 function renderizarTabla(erabiltzaileak) {
     const tbody = document.querySelector('#tabla-erabiltzaileak tbody');
     tbody.innerHTML = '';
@@ -147,23 +145,23 @@ function editatuErabiltzailea(erabiltzailea) {
     <form id="formEditErabiltzaileak" class="needs-validation" novalidate>
         <div class="mb-3">
             <label class="form-label"><strong>NAN:</strong></label>
-            <input disabled type="text" class="form-control" id="nanErabiltzaileakInput" value="${erabiltzailea.nan}">
+            <input disabled type="text" class="form-control" id="nanErabiltzaileakEditInput" value="${erabiltzailea.nan}">
         </div>
         <div class="mb-3">
             <label class="form-label"><strong>Izena:</strong></label>
-            <input type="text" class="form-control" id="izenaErabiltzaileakInput" value="${erabiltzailea.izena}">
+            <input type="text" class="form-control" id="izenaErabiltzaileakEditInput" value="${erabiltzailea.izena}">
         </div>
         <div class="mb-3">
             <label class="form-label"><strong>Abizena:</strong></label>
-            <input type="text" class="form-control" id="abizenaErabiltzaileakInput" value="${erabiltzailea.abizena}">
+            <input type="text" class="form-control" id="abizenaErabiltzaileakEditInput" value="${erabiltzailea.abizena}">
         </div>
         <div class="mb-3">
             <label class="form-label"><strong>Erabiltzailea:</strong></label>
-            <input type="text" class="form-control" id="erabiltzaileaErabiltzaileakInput" value="${erabiltzailea.erabiltzailea}">
+            <input type="text" class="form-control" id="erabiltzaileaErabiltzaileakEditInput" value="${erabiltzailea.erabiltzailea}">
         </div>
         <div class="mb-3">
             <label class="form-label"><strong>Rola:</strong></label>
-            <select id="selectRola" class="form-select">
+            <select id="selectEditRola" class="form-select">
                 <option value="A" ${erabiltzailea.rola === 'A' ? 'selected' : ''}>Admin</option>
                 <option value="U" ${erabiltzailea.rola === 'U' ? 'selected' : ''}>User</option>
             </select>
@@ -199,10 +197,10 @@ function confirmEzabatuModal(item) {
     };
 }
 
-async function gordeDatuakUpdate(){
-      try {
+async function gordeDatuakUpdate() {
+    try {
         await updateErabiltzailea();
-        
+
         const modal = bootstrap.Modal.getInstance(document.getElementById('erabiltzaileakEditatuModal'));
         modal.hide();
         location.reload();
@@ -214,11 +212,11 @@ async function gordeDatuakUpdate(){
 
 //Service-ra deitzen da eta bidali baino lehen balidazioak
 async function updateErabiltzailea() {
-    const nan = document.querySelector('#nanErabiltzaileakInput').value.trim();
-    const izena = document.querySelector('#izenaErabiltzaileakInput').value.trim();
-    const abizena = document.querySelector('#abizenaErabiltzaileakInput').value.trim();
-    const erabiltzailea = document.querySelector('#erabiltzaileaErabiltzaileakInput').value.trim();
-    const rola = document.querySelector('#selectRola').value.trim();
+    const nan = document.querySelector('#nanErabiltzaileakEditInput').value.trim();
+    const izena = document.querySelector('#izenaErabiltzaileakEditInput').value.trim();
+    const abizena = document.querySelector('#abizenaErabiltzaileakEditInput').value.trim();
+    const erabiltzailea = document.querySelector('#erabiltzaileaErabiltzaileakEditInput').value.trim();
+    const rola = document.querySelector('#selectEditRola').value.trim();
 
     if (!izena) {
         alert('Erabiltzaile izena falta da');
@@ -236,10 +234,10 @@ async function updateErabiltzailea() {
     await erabiltzaileakService.update(nan, izena, abizena, erabiltzailea, rola);
 }
 
-async function gordeDatuakSortu(){
-      try {
+async function gordeDatuakSortu() {
+    try {
         await sortuErabiltzailea();
-        
+
         const modalSortu = bootstrap.Modal.getInstance(document.getElementById('erabiltzaileakGehitzekoModal'));
         modalSortu.hide();
         location.reload();
@@ -261,17 +259,17 @@ async function sortuErabiltzailea() {
 
     console.log(nanSortu, izenaSortu, abizenaSortu, erabiltzaileaSortu, pasahitzaBatSortu, rolaSortu);
 
-    if(!pasahitzaBatSortu){
+    if (!pasahitzaBatSortu) {
         alert('Erabiltzaile pasahitza falta da');
         return;
     }
 
-    if(!pasahitzaBiSortu){
+    if (!pasahitzaBiSortu) {
         alert('Erabiltzaile pasahitza errepikatzea falta da');
         return;
     }
 
-    if(pasahitzaBatSortu !== pasahitzaBiSortu){
+    if (pasahitzaBatSortu !== pasahitzaBiSortu) {
         alert('Bi pasahitzak ez dira berdinak');
         return;
     }
@@ -307,7 +305,7 @@ async function sortuErabiltzailea() {
 
 function komprobatuNAN(dni) {
     const letras = 'TRWAGMYFPDXBNJZSQVHLCKE';
-    
+
     // 1. Sarrera garbitu eta estandarizatu (zuriuneak/gidoiak kendu, larri bihurtu)
     dni = dni.toUpperCase().replace(/[^0-9A-Z]/g, '');
 
@@ -315,13 +313,13 @@ function komprobatuNAN(dni) {
     if (dni.length !== 9 || !dni.match(/^[0-9XYZ]?\d{7}[A-Z]$/)) {
         return false; // Okerra: formatu edo luzera desegokia
     }
-    
+
     // 3. NIE kudeatu (atzerritarrak): X, Y, Z 0, 1, 2 bihurtu kalkulua egiteko
     dni = dni.replace(/^X/, '0').replace(/^Y/, '1').replace(/^Z/, '2');
 
     // 4. Zenbakia eta letra bereizi
     // parseInt erabiliz, zenbakizko zatia lortzen dugu
-    const numero = parseInt(dni.substring(0, 8), 10); 
+    const numero = parseInt(dni.substring(0, 8), 10);
     const letra = dni.charAt(8);
 
     // 5. Kalkulua eta konprobazioa (23ko Modulua)
