@@ -16,6 +16,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderizarKokalekuak(kokalekuak);
     renderizarKategoriak(kategoriak);
     renderizarGelak(gelak);
+
+    document.querySelector('#sumarKokaleku').addEventListener('click', sortuKokaleku);
+    document.querySelector('#sumarGela').addEventListener('click', sortuGela);
+    document.querySelector('#sumarKategoria').addEventListener('click', sortuKategoria);
   } catch (errorea) {
     console.error('Errorea datuak kargatzean:', errorea);
   }
@@ -197,6 +201,99 @@ function editatuKategoria(kategoria) {
   modal.show();
 }
 
+//Modal sortu Kokalekua
+function sortuKokaleku() {
+  const modalElement = document.getElementById('kudeaketaModal');
+  modalElement.dataset.mota = 'kokaleku';
+  modalElement.dataset.modo = 'sortu';
+  const modal = new bootstrap.Modal(modalElement);
+
+  const modalTitle = document.querySelector('#inbentarioaModalLabel');
+  modalTitle.textContent = 'Kokaleku berria sortu';
+
+  const modalBody = document.querySelector('#kudeaketaModal .modal-body');
+  modalBody.innerHTML = `
+    <form id="formSortuKokaleku" class="needs-validation" novalidate>
+      <div class="mb-3">
+        <label class="form-label"><strong>Etiketa</strong></label>
+        <input type="text" class="form-control" id="etiketaInput" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label"><strong>Gela</strong></label>
+        <select class="form-select" id="idGelaInput" required></select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label"><strong>Hasiera data</strong></label>
+        <input type="date" class="form-control" id="hasieraInput">
+      </div>
+      <div class="mb-3">
+        <label class="form-label"><strong>Amaiera data</strong></label>
+        <input type="date" class="form-control" id="amaieraInput">
+      </div>
+    </form>
+  `;
+
+  const select = modalBody.querySelector('#idGelaInput');
+  gelak.forEach(g => {
+    const option = document.createElement('option');
+    option.value = g.id;
+    option.textContent = g.izena;
+    select.appendChild(option);
+  });
+
+  modal.show();
+}
+
+//Modal sortu Gela
+function sortuGela() {
+  const modalElement = document.getElementById('kudeaketaModal');
+  modalElement.dataset.mota = 'gela';
+  modalElement.dataset.modo = 'sortu';
+  const modal = new bootstrap.Modal(modalElement);
+
+  const modalTitle = document.querySelector('#inbentarioaModalLabel');
+  modalTitle.textContent = 'Gela berria sortu';
+
+  const modalBody = document.querySelector('#kudeaketaModal .modal-body');
+  modalBody.innerHTML = `
+    <form id="formSortuGela" class="needs-validation" novalidate>
+      <div class="mb-3">
+        <label class="form-label"><strong>Izena</strong></label>
+        <input type="text" class="form-control" id="izenaInput" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label"><strong>Taldea</strong></label>
+        <input type="text" class="form-control" id="taldeaInput" required>
+      </div>
+    </form>
+  `;
+
+  modal.show();
+}
+
+//Modal sortu Kategoria
+function sortuKategoria() {
+  const modalElement = document.getElementById('kudeaketaModal');
+  modalElement.dataset.mota = 'kategoria';
+  modalElement.dataset.modo = 'sortu';
+  const modal = new bootstrap.Modal(modalElement);
+
+  const modalTitle = document.querySelector('#inbentarioaModalLabel');
+  modalTitle.textContent = 'Kategoria berria sortu';
+
+  const modalBody = document.querySelector('#kudeaketaModal .modal-body');
+  modalBody.innerHTML = `
+    <form id="formSortuKategoria" class="needs-validation" novalidate>
+      <div class="mb-3">
+        <label class="form-label"><strong>Izena</strong></label>
+        <input type="text" class="form-control" id="izenaKategoriaInput" required>
+      </div>
+    </form>
+  `;
+
+  modal.show();
+}
+
 //Modal ezabatzeko konfirmazioa
 function confirmEzabatuModal(item) {
   const modalTitle = document.querySelector('#ezabatuModalLabel');
@@ -234,11 +331,13 @@ function confirmEzabatuModal(item) {
 
 //EKINTZAK
 
-//Editatutako datuak gordetzeko
+//Editatutako eta sortutako datuak gordetzeko
+//Modo bidez sortu edo editatu. EZ BADA SORTU EDITATU DA DEFEKTU
 //Mota bidez ze Service deitzen den erabakitzen da
 async function gordeDatuak() {
   const modalElement = document.getElementById('kudeaketaModal');
   const mota = modalElement.dataset.mota;
+  const modo = modalElement.dataset.modo || 'editatu';
   const form = modalElement.querySelector('form');
 
   if (!form.checkValidity()) {
@@ -248,11 +347,11 @@ async function gordeDatuak() {
 
   try {
     if (mota === 'gela') {
-      await gordeGela();
+      modo === 'sortu' ? await sortuGelaBerria() : await gordeGela();
     } else if (mota === 'kokaleku') {
-      await gordeKokalekua();
+      modo === 'sortu' ? await sortuKokalekuBerria() : await gordeKokalekua();
     } else if (mota === 'kategoria') {
-      await gordeKategoria();
+      modo === 'sortu' ? await sortuKategoriaBerria() : await gordeKategoria();
     }
     
     const modal = bootstrap.Modal.getInstance(document.getElementById('kudeaketaModal'));
@@ -264,7 +363,10 @@ async function gordeDatuak() {
   }
 }
 
+
 //Service-ra deitzen da eta bidali baino lehen balidazioak
+
+//EDITATZEKO FUNTZIOAK
 async function gordeGela() {
   const id = document.querySelector('#idGelaInput').value;
   const izena = document.querySelector('#izenaInput').value.trim();
@@ -319,3 +421,33 @@ async function gordeKategoria() {
 
 document.querySelector('#btnGorde').addEventListener('click', gordeDatuak);
 
+//SORTZEKO FUNTZIOAK
+
+async function sortuKokalekuBerria() {
+  const etiketa = document.querySelector('#etiketaInput').value.trim();
+  const idGela = document.querySelector('#idGelaInput').value;
+  const hasieraData = document.querySelector('#hasieraInput').value;
+  const amaieraData = document.querySelector('#amaieraInput').value;
+
+  if (!etiketa) {
+    alert('Etiketa falta da');
+    return;
+  }
+  if (!idGela) {
+    alert('Gela hautatu behar da');
+    return;
+  }
+
+  await kokalekuakService.create( etiketa, idGela, hasieraData, amaieraData );
+}
+
+async function sortuGelaBerria() {
+  const izena = document.querySelector('#izenaInput').value.trim();
+  const taldea = document.querySelector('#taldeaInput').value.trim();
+  await gelakService.create( izena, taldea );
+}
+
+async function sortuKategoriaBerria() {
+  const izena = document.querySelector('#izenaKategoriaInput').value.trim();
+  await kategoriakService.create( izena );
+}
