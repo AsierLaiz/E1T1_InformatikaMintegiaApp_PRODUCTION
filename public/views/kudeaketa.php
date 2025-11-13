@@ -65,9 +65,6 @@ $CURRENT_USER = require_auth_view('login');
 
                 <!-- KOKALEKU TAB -->
                 <div class="tab-pane fade" id="content-opcion2" aria-labelledby="tab-opcion2">
-                  <div class="mb-4 me-3 d-flex justify-content-end">
-                    <button class="btn btn-sm btnSumar" id="sumarKokaleku" title="Sortu kokaleku berria"><i class="fa-solid fa-plus"></i> Sortu</button>
-                  </div>
                   <div class="table-responsive table-scroll-container">
                     <table class="table table-hover" id="tabla-kokalekuak">
                       <thead>
