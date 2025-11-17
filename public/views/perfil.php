@@ -34,9 +34,9 @@ $CURRENT_USER = require_auth_view('login');
                                             <p id="abizena" class="fw-normal fs-6 text-dark ms-3"></p>
                                         </li>
                                         <li class="mb-3">
-                                            <p class="mb-1 text-muted small"><i class="bi bi-person-fill me-2"></i> Theme:</p>
-                                            <button id="themeToggle" class="btn btn-sm btnIkusi ms-3">
-                                                <i class="fas fa-moon"></i>
+                                            <p class="mb-1 text-muted small"><i class="bi bi-person-fill me-2"></i> Modua:</p>
+                                            <button id="themeToggle" class="btn btn-sm btnIkusi ms-3" title="kolore modua aldatu">
+                                                <i class="theme-icon fas fa-moon"></i>
                                             </button>
                                         </li>
                                     </ul>
