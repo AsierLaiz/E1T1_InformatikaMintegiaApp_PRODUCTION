@@ -14,7 +14,7 @@
 <header>
     <nav class="navbar navbar-expand-lg pb-3 fixed-top">
         
-        <a class="navbar-brand ms-5" href="home" alt="Orri printzipalera joan"><img src="./assets/img/logo/FPSanturtzi_Logo.png" alt="FP Santurtzi LH logoa" /></a>
+        <a class="navbar-brand ms-5" href="home" alt="Orri printzipalera joan"><img id="logo" src="./assets/img/logo/FPSanturtzi_Logo.png" alt="FP Santurtzi LH logoa" /></a>
         
         <button class="navbar-toggler custom-transition collapsed"
                 type="button" 

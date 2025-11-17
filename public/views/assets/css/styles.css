@@ -650,6 +650,10 @@ footer a.text-white-50:hover {
     background-color: rgb(187, 32, 32) !important;
 }
 
+.theme-icon {
+    content: "\f186";
+}
+
 /* --------- */
 /* SPAN */
 .mensajeError{
@@ -863,4 +867,15 @@ body.dark-mode .color-ez{
 body.dark-mode .bilatuInput::placeholder {
     color: #aaa !important;
     opacity: 1 !important;
+}
+
+body.dark-mode .btnIkusi {
+    background-color: #ffffff !important;
+    border-color: #4a6d8f !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode .theme-icon::before {
+    content: "\f185";
+    color: #000000  !important;
 }
