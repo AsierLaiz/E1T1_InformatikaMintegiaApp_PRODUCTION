@@ -340,7 +340,7 @@ async function updatePasahitza() {
 
     if (!pasahitza.value.trim()) {
         pasahitza.style.border = '1px solid red';
-        document.querySelector('#pasahitzaRepeErabiltzaileakPasahitzaInput').style.border = '1px solid grey';
+        pasahitzaRepe.style.border = '1px solid grey';
         mensajeError.style.display = 'block';
         mensajeError.innerHTML = 'Pasahitza bat sartu behar da';
         return;
@@ -443,7 +443,7 @@ async function sortuErabiltzailea() {
         return;
     }
 
-    if (pasahitzaBatSortu.value.lenght < 6 || pasahitzaBatSortu.value.lenght > 20) {
+    if (pasahitzaBatSortu.value.length < 6 || pasahitzaBatSortu.value.length > 20) {
         pasahitzaBatSortu.style.border = '1px solid red';
         mensajeError.style.display = 'block';
         mensajeSuccess.style.display = 'none';
@@ -478,7 +478,7 @@ async function sortuErabiltzailea() {
     pasahitzaBiSortu.style.border = '1px solid grey';
     mensajeSuccess.style.display = 'block';
     mensajeError.style.display = 'none';
-    mensajeSuccess.innerHTML = 'Pasahitza aldatu da';
+    mensajeSuccess.innerHTML = 'Erabiltzailea sortu da';
 
     setTimeout(() => {
       const modal = bootstrap.Modal.getInstance(document.getElementById('erabiltzaileakGehitzekoModal'));

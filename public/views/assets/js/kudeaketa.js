@@ -279,7 +279,7 @@ function confirmEzabatuModal(item) {
   confirmBtn.onclick = async () => {
     try {
       if (item.etiketa) {
-        await kokalekuakService.delete(item.id);
+        await kokalekuakService.delete(item.etiketa, item.hasieraData);
       } else if (item.taldea) {
         await gelakService.delete(item.id);
       } else {
@@ -316,7 +316,6 @@ async function gordeDatuak() {
 
   } catch (errorea) {
     console.error('Errorea datuak gordetzean:', errorea);
-    alert('Errorea datuak gordetzean');
   }
 }
 
@@ -496,7 +495,7 @@ async function sortuGelaBerria() {
 
   mensajeSuccess.style.display = 'block';
   mensajeError.style.display = 'none';
-  mensajeSuccess.innerHTML = 'Kokalekua sortu da';
+  mensajeSuccess.innerHTML = 'Gela sortu da';
 
     setTimeout(() => {
     const modal = bootstrap.Modal.getInstance(document.getElementById('kudeaketaModal'));
