@@ -4,7 +4,7 @@ const kokalekuakService = {
     // Erregistro guztiak lortu
     async getAll() {
         try {
-            const response = await fetch(API_URL, { method: 'GET' });
+            const response = await fetch(API_URL, { method: 'GET', credentials: 'include' });
             if (!response.ok) throw new Error('Kokalekuak: Errorea datuak lortzean.');
             return await response.json();
         } catch (error) {
@@ -23,7 +23,7 @@ const kokalekuakService = {
         }
         try {
             const url = `${API_URL}?etiketa=${encodeURIComponent(etiketa)}&hasieraData=${encodeURIComponent(hasieraData)}`;
-            const response = await fetch(url, { method: 'GET' });
+            const response = await fetch(url, { method: 'GET', credentials: 'include' });
             const data = await response.json();
             if (!response.ok) {
                 throw new Error(data.error || 'Kokalekuak: Errorea kokalekuak lortzean.');
@@ -42,7 +42,7 @@ const kokalekuakService = {
         }
         try {
             const url = `${API_URL}?idGela=${encodeURIComponent(idGela)}`;
-            const response = await fetch(url, { method: 'GET' });
+            const response = await fetch(url, { method: 'GET', credentials: 'include' });
             const data = await response.json();
             if (!response.ok) {
                 throw new Error(data.error || 'Kokalekuak: Errorea kokalekuak lortzean.');
@@ -61,7 +61,7 @@ const kokalekuakService = {
         }
         try {
             const url = `${API_URL}?etiketa=${encodeURIComponent(etiketa)}`;
-            const response = await fetch(url, { method: 'GET' });
+            const response = await fetch(url, { method: 'GET', credentials: 'include' });
             const data = await response.json();
             if (!response.ok) {
                 throw new Error(data.error || 'Kokalekuak: Errorea kokalekuak lortzean.');
@@ -78,6 +78,7 @@ const kokalekuakService = {
         try {
             const response = await fetch(API_URL, {
                 method: 'POST',
+                credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ etiketa, idGela, hasieraData, amaieraData })
             });
@@ -95,6 +96,7 @@ const kokalekuakService = {
         try {
             const response = await fetch(API_URL, {
                 method: 'PUT',
+                credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ etiketa, idGela, hasieraData, amaieraData })
             });
@@ -112,6 +114,7 @@ const kokalekuakService = {
         try {
             const response = await fetch(API_URL, {
                 method: 'DELETE',
+                credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ etiketa, hasieraData })
             });

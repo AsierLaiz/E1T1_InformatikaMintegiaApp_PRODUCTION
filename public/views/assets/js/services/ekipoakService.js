@@ -4,7 +4,7 @@ const ekipoakService = {
     // Erregistro guztiak lortu
     async getAll() {
         try {
-            const response = await fetch(API_URL, { method: 'GET' });
+            const response = await fetch(API_URL, { method: 'GET', credentials: 'include' });
             if (!response.ok) throw new Error('Ekipamendua: Errorea datuak lortzean.');
             return await response.json();
         } catch (error) {
@@ -20,7 +20,7 @@ const ekipoakService = {
         }
         try {
             const url = `${API_URL}?id=${encodeURIComponent(id)}`;
-            const response = await fetch(url, { method: 'GET' });
+            const response = await fetch(url, { method: 'GET', credentials: 'include' });
             const data = await response.json();
             if (!response.ok) {
                 throw new Error(data.error || 'Ekipamendua: Errorea ekipoa lortzean.');
@@ -37,6 +37,7 @@ const ekipoakService = {
         try {
             const response = await fetch(API_URL, {
                 method: 'POST',
+                credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
             });
@@ -53,6 +54,7 @@ const ekipoakService = {
         try {
             const response = await fetch(API_URL, {
                 method: 'PUT',
+                credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ id, izena, deskribapena, marka, modelo, stock, idKategoria })
             });
@@ -70,6 +72,7 @@ const ekipoakService = {
         try {
             const response = await fetch(API_URL, {
                 method: 'DELETE',
+                credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ id })
             });

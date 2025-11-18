@@ -4,7 +4,7 @@ const erabiltzaileakService = {
     // Erregistro guztiak lortu
     async getAll() {
         try {
-            const response = await fetch(API_URL, { method: 'GET' });
+            const response = await fetch(API_URL, { method: 'GET', credentials: 'include' });
             if (!response.ok) throw new Error('Erabiltzaileak: Errorea datuak lortzean.');
             return await response.json();
         } catch (error) {
@@ -20,7 +20,7 @@ const erabiltzaileakService = {
         }
         try {
             const url = `${API_URL}?nan=${encodeURIComponent(nan)}`;
-            const response = await fetch(url, { method: 'GET' });
+            const response = await fetch(url, { method: 'GET', credentials: 'include' });
             const data = await response.json();
             if (!response.ok) {
                 throw new Error(data.error || 'Erabiltzaileak: Errorea datuak lortzean.');
@@ -37,6 +37,7 @@ const erabiltzaileakService = {
         try {
             const response = await fetch(API_URL, {
                 method: 'POST',
+                credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ nan, izena, abizena, erabiltzailea, pasahitza, rola })
             });
@@ -54,6 +55,7 @@ const erabiltzaileakService = {
         try {
             const response = await fetch(API_URL, {
                 method: 'PUT',
+                credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ nan, izena, abizena, erabiltzailea, rola })
             });
@@ -71,6 +73,7 @@ const erabiltzaileakService = {
         try {
             const response = await fetch(API_URL, {
                 method: 'PUT',
+                credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ nan, pasahitza, pasahitzaKonfirm })
             });
@@ -88,6 +91,7 @@ const erabiltzaileakService = {
         try {
             const response = await fetch(API_URL, {
                 method: 'DELETE',
+                credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ nan })
             });

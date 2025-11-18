@@ -3,6 +3,16 @@ require_once __DIR__ . '/../db.php';
 require_once __DIR__ . '/../models/Erabiltzaile.php';
 
 header('Content-Type: application/json; charset=utf-8');
+
+session_set_cookie_params([
+    'lifetime' => 0,
+    'path' => '/',
+    'domain' => '.talde1.edu',
+    'secure' => true,
+    'httponly' => true,
+    'samesite' => 'None'
+]);
+
 // Datu-baserako konexioa
 $db = new DB();
 $db->konektatu();
@@ -34,7 +44,6 @@ function tryRebuildSessionFromCookie($model) {
         $token = $_COOKIE['remember_me'];
         $u = $model->validateRememberToken($token);
         if ($u) {
-            // Session user berreraiki (pasahitzik gabe)
             $_SESSION['user'] = [
                 'nan' => $u['nan'],
                 'izena' => $u['izena'],
@@ -43,8 +52,14 @@ function tryRebuildSessionFromCookie($model) {
                 'rola' => $u['rola']
             ];
         } else {
-            // token baliogabea edo iraungia -> cookiea ezabatu segurtasunagatik
-            setcookie('remember_me', '', time() - 3600, '/', '', true, true);
+            setcookie('remember_me', '', [
+                'expires' => time() - 3600,
+                'path' => '/',
+                'domain' => '.talde1.edu',
+                'secure' => true,
+                'httponly' => true,
+                'samesite' => 'None'
+            ]);
         }
     }
 }
@@ -84,9 +99,15 @@ if ($method === 'POST' && $action === 'login') {
         $expira_ts = time() + (7 * 24 * 60 * 60);
         $expira = date('Y-m-d H:i:s', $expira_ts);
         $model->createRememberToken($u['nan'], $token, $expira);
-        // secure flags: mark secure = false, http lokalean lan egiten baduzu; ekoizpenean pon true
-        // ESAN ORAINGOZ EZ DAGOELA HTTPS $secure = (! empty ($_SERVER ['HTTPS']) & & $_SERVER ['HTTPS']! = = 'off');
-        setcookie('remember_me', $token, $expira_ts, '/', '', false, true);
+        
+        setcookie('remember_me', $token, [
+            'expires' => $expira_ts,
+            'path' => '/',
+            'domain' => '.talde1.edu',
+            'secure' => true,
+            'httponly' => true,
+            'samesite' => 'None'
+        ]);
     }
 
     json_ok(['message' => 'Saioa ondo hasi da.', 'user' => $_SESSION['user']]);
@@ -100,7 +121,14 @@ if ($method === 'POST' && $action === 'logout') {
     // Ezabatu token BDn cookierik badago
     if (!empty($_COOKIE['remember_me'])) {
         $model->deleteRememberToken($_COOKIE['remember_me']);
-        setcookie('remember_me', '', time() - 3600, '/', '', false, true);
+        setcookie('remember_me', '', [
+            'expires' => time() - 3600,
+            'path' => '/',
+            'domain' => '.talde1.edu',
+            'secure' => true,
+            'httponly' => true,
+            'samesite' => 'None'
+        ]);
     }
 
     $_SESSION = [];

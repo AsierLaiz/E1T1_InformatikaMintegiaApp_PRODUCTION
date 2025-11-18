@@ -4,7 +4,7 @@ const inbentarioaService = {
     // Erregistro guztiak lortu
     async getAll() {
         try {
-            const response = await fetch(API_URL, { method: 'GET' });
+            const response = await fetch(API_URL, { method: 'GET', credentials: 'include' });
             if (!response.ok) throw new Error('Inbentarioa: Errorea datuak lortzean.');
             return await response.json();
         } catch (error) {
@@ -20,7 +20,7 @@ const inbentarioaService = {
         }
         try {
             const url = `${API_URL}?etiketa=${encodeURIComponent(etiketa)}`;
-            const response = await fetch(url, { method: 'GET' });
+            const response = await fetch(url, { method: 'GET', credentials: 'include' });
             const data = await response.json();
             if (!response.ok) {
                 throw new Error(data.error || 'Inbentarioa: Errorea inbentarioa lortzean.');
@@ -39,7 +39,7 @@ const inbentarioaService = {
         }
         try {
             const url = `${API_URL}?idEkipamendu=${encodeURIComponent(idEkipamendu)}`;
-            const response = await fetch(url, { method: 'GET' });
+            const response = await fetch(url, { method: 'GET', credentials: 'include' });
             const data = await response.json();
             if (!response.ok) {
                 throw new Error(data.error || 'Inbentarioa: Errorea etiketatu_gabe lortzean.');
@@ -56,6 +56,7 @@ const inbentarioaService = {
         try {
             const response = await fetch(API_URL, {
                 method: 'POST',
+                credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ etiketa, idEkipamendu, erosketaData })
             });
@@ -73,6 +74,7 @@ const inbentarioaService = {
         try {
             const response = await fetch(API_URL, {
                 method: 'PUT',
+                credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ etiketa, idEkipamendu, erosketaData })
             });
@@ -90,6 +92,7 @@ const inbentarioaService = {
         try {
             const response = await fetch(API_URL, {
                 method: 'DELETE',
+                credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ etiketa })
             });
