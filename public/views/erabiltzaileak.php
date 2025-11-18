@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . 'https://api.talde1.edu/require_auth.php';
-$CURRENT_USER = require_admin_view('login', 'home');
+require_once __DIR__ . '/lib/require_auth.php';
+$CURRENT_USER = require_auth_view('login');
 ?>
 <?php require_once "partials/header.php" ?>
 
