@@ -1,4 +1,4 @@
-const API_URL = '../../src/controllers/EtiketakController.php';
+const API_URL = 'https://api.talde1.edu/controllers/EtiketakController.php';
 
 const etiketakService = {
     // Erregistro guztiak lortu

@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     async function logout() {
         try {
-            const res = await fetch('../../src/controllers/AuthController.php?action=logout', {
+            const res = await fetch('https://api.talde1.edu/controllers/AuthController.php?action=logout', {
                 method: 'POST',
                 credentials: 'include'
             });

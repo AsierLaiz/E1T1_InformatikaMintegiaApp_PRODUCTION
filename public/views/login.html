@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../src/require_auth.php';
+require_once __DIR__ . 'https://api.talde1.edu/require_auth.php';
 _rebuild_session_from_cookie($model);
 if (!empty($_SESSION['user'])) {
     header('Location: ./home');

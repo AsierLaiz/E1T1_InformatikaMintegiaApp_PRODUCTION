@@ -2,7 +2,7 @@
     const form = document.getElementById('loginForm');
     const btn = document.getElementById('btnSubmit');
     const alertContainer = document.getElementById('alertContainer');
-    const apiUrl = '../../src/controllers/AuthController.php?action=login';
+    const apiUrl = 'https://api.talde1.edu/controllers/AuthController.php?action=login';
 
     function showAlert(message, type = 'danger') {
         alertContainer.innerHTML = `

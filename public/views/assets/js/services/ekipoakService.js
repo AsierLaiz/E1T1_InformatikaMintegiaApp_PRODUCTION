@@ -1,4 +1,4 @@
-const API_URL = '../../src/controllers/EkipoController.php';
+const API_URL = 'https://api.talde1.edu/controllers/EkipoController.php';
 
 const ekipoakService = {
     // Erregistro guztiak lortu

@@ -1,4 +1,4 @@
-const API_URL = '../../src/controllers/KategoriaController.php';
+const API_URL = 'https://api.talde1.edu/controllers/KategoriaController.php';
 
 const kategoriakService = {
     // Erregistro guztiak lortu

@@ -1,4 +1,4 @@
-const API_URL = '../../src/controllers/GelaController.php';
+const API_URL = 'https://api.talde1.edu/controllers/GelaController.php';
 
 const gelakService = {
     // Erregistro guztiak lortu

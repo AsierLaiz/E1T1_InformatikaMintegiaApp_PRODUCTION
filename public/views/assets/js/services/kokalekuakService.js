@@ -1,4 +1,4 @@
-const API_URL = '../../src/controllers/KokalekuController.php';
+const API_URL = 'https://api.talde1.edu/controllers/KokalekuController.php';
 
 const kokalekuakService = {
     // Erregistro guztiak lortu

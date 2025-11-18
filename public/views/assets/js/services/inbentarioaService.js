@@ -1,4 +1,4 @@
-const API_URL = '../../src/controllers/InbentarioController.php';
+const API_URL = 'https://api.talde1.edu/controllers/InbentarioController.php';
 
 const inbentarioaService = {
     // Erregistro guztiak lortu

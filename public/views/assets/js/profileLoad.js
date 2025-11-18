@@ -7,7 +7,7 @@
 
     async function erabiltzaileaKargatu() {
         try {
-            const res = await fetch('../../src/controllers/AuthController.php?action=me', {
+            const res = await fetch('https://api.talde1.edu/controllers/AuthController.php?action=me', {
                 method: 'GET',
                 credentials: 'include'
             });
